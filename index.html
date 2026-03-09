@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Car Rentals GR — Ενοικίαση Αυτοκινήτων Αθήνα</title>
+  <meta name="description" content="Ενοικίαση αυτοκινήτων από 10€/ημέρα. Παράδοση σε Αθήνα, Αεροδρόμιο, Πειραιά. Χωρίς πιστωτική κάρτα, χωρίς κρυφές χρεώσεις. Καλέστε 6983056936."/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23e81c2e'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Arial Black' fill='white'>D</text></svg>"/>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-brand">Daily<span>Car</span></div>
+  <div class="loader-track"><div class="loader-fill"></div></div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">Daily<span>Car</span><small>Rentals GR</small></a>
+    <div class="nav-links">
+      <a href="index.html">Αρχική</a>
+      <a href="fleet.html">Στόλος</a>
+      <a href="about.html">Σχετικά</a>
+      <a href="contact.html" class="nav-cta">Κράτηση →</a>
+    </div>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mob-nav">
+  <a href="index.html">Αρχική</a>
+  <a href="fleet.html">Στόλος Αυτοκινήτων</a>
+  <a href="about.html">Σχετικά με εμάς</a>
+  <a href="contact.html" class="mob-cta">Κάντε Κράτηση →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-wrap">
+    <!-- Left -->
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span class="hero-badge-txt">★ 5.0 — Google Reviews</span>
+      </div>
+      <h1 class="hero-h1">
+        <span class="sub-line">Ενοικίαση Αυτοκινήτων</span>
+        Οδήγησε<br/><em>Σήμερα.</em>
+      </h1>
+      <p class="hero-p">Καθαρά, ασφαλή και οικονομικά αυτοκίνητα από <strong style="color:#fff">10€/ημέρα</strong>. Χωρίς πιστωτική κάρτα, χωρίς κρυφές χρεώσεις. Παράδοση σε Αθήνα, Αεροδρόμιο και Πειραιά.</p>
+      <div class="hero-btns">
+        <a href="contact.html" class="btn-r">
+          Κάντε Κράτηση
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="tel:6983056936" class="btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.91 5.91l.73-.73a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          698 305 6936
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hs-val"><span data-count="10">10</span>€<span style="font-size:.5em;color:rgba(255,255,255,.35);font-weight:300">/day</span></div>
+          <div class="hs-lbl">Από μόνο</div>
+        </div>
+        <div>
+          <div class="hs-val"><span data-count="5">5</span><span>.0★</span></div>
+          <div class="hs-lbl">Google Rating</div>
+        </div>
+        <div>
+          <div class="hs-val"><span data-count="3">3</span><span>+</span></div>
+          <div class="hs-lbl">Περιοχές παράδοσης</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Visual -->
+    <div class="hero-vis">
+      <div class="fl-tag">
+        <div class="fl-ico">🚀</div>
+        <div><div class="fl-txt">Άμεση εξυπηρέτηση</div><div class="fl-sub">Σε λίγα λεπτά</div></div>
+      </div>
+      <div class="fl-tag">
+        <div class="fl-ico">🛡️</div>
+        <div><div class="fl-txt">Ασφαλισμένα</div><div class="fl-sub">Όλα τα οχήματα</div></div>
+      </div>
+      <div class="hero-card">
+        <div class="car-img-box">
+          <!-- SVG Car Illustration -->
+          <svg class="car-svg" viewBox="0 0 400 220" style="width:88%;filter:drop-shadow(0 0 28px rgba(232,28,46,.25))">
+            <!-- Car body -->
+            <ellipse cx="200" cy="180" rx="175" ry="18" fill="rgba(232,28,46,.08)"/>
+            <!-- Body -->
+            <path d="M40 155 Q40 130 60 125 L110 115 L150 70 Q165 55 195 52 L245 50 Q275 50 295 68 L330 115 L355 120 Q375 125 375 145 L375 155 Z" fill="#1e1e1e" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+            <!-- Roof -->
+            <path d="M150 70 Q165 55 195 52 L245 50 Q275 50 295 68 L330 115 L110 115 Z" fill="#2a2a2a" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <!-- Windows -->
+            <path d="M160 112 L165 75 Q172 62 192 59 L245 57 Q268 57 280 70 L305 112 Z" fill="rgba(100,180,255,.12)" stroke="rgba(100,180,255,.2)" stroke-width="1"/>
+            <!-- Divider -->
+            <line x1="235" y1="57" x2="232" y2="112" stroke="rgba(255,255,255,.1)" stroke-width="2"/>
+            <!-- Red stripe -->
+            <rect x="40" y="140" width="335" height="6" rx="3" fill="rgba(232,28,46,.6)"/>
+            <!-- Wheels -->
+            <circle cx="110" cy="160" r="28" fill="#111" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
+            <circle cx="110" cy="160" r="17" fill="#1a1a1a" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+            <circle cx="110" cy="160" r="7" fill="rgba(232,28,46,.6)"/>
+            <circle cx="295" cy="160" r="28" fill="#111" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
+            <circle cx="295" cy="160" r="17" fill="#1a1a1a" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+            <circle cx="295" cy="160" r="7" fill="rgba(232,28,46,.6)"/>
+            <!-- Headlight -->
+            <ellipse cx="62" cy="138" rx="14" ry="8" fill="rgba(255,230,100,.15)" stroke="rgba(255,230,100,.25)" stroke-width="1"/>
+            <ellipse cx="357" cy="138" rx="12" ry="7" fill="rgba(255,100,80,.15)" stroke="rgba(255,80,60,.25)" stroke-width="1"/>
+          </svg>
+          <div class="price-pill">από 10€<small>/ ημέρα</small></div>
+        </div>
+        <div class="feat-row">
+          <div class="feat-item"><div class="feat-ico">✅</div><div class="feat-txt">Χωρίς κάρτα</div></div>
+          <div class="feat-item"><div class="feat-ico">🔒</div><div class="feat-txt">Ασφαλισμένο</div></div>
+          <div class="feat-item"><div class="feat-ico">📍</div><div class="feat-txt">Delivery</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section why">
+  <div class="wrap">
+    <div class="rv"><div class="s-tag">Γιατί εμάς</div></div>
+    <div class="rv d1"><h2 class="s-title">Η πιο <span>αξιόπιστη</span> επιλογή</h2></div>
+    <div class="rv d2"><p class="s-sub">Απλή διαδικασία, διαφανείς τιμές και άμεση εξυπηρέτηση — αυτά που πραγματικά μετράνε.</p></div>
+    <div class="why-cards">
+      <div class="why-c rv d1">
+        <div class="why-num">01</div>
+        <div class="why-icon">💳</div>
+        <h3>Χωρίς Πιστωτική Κάρτα</h3>
+        <p>Δεν απαιτείται πιστωτική κάρτα για κράτηση. Απλή και γρήγορη διαδικασία χωρίς γραφειοκρατία.</p>
+      </div>
+      <div class="why-c rv d2">
+        <div class="why-num">02</div>
+        <div class="why-icon">💰</div>
+        <h3>Χωρίς Κρυφές Χρεώσεις</h3>
+        <p>Πλήρης διαφάνεια στις τιμές. Αυτό που βλέπεις είναι αυτό που πληρώνεις — τίποτα παραπάνω.</p>
+      </div>
+      <div class="why-c rv d3">
+        <div class="why-num">03</div>
+        <div class="why-icon">🚗</div>
+        <h3>Καθαρά & Ασφαλή Οχήματα</h3>
+        <p>Όλα τα αυτοκίνητά μας είναι σε άριστη κατάσταση, πλήρως καθαρά και ασφαλισμένα.</p>
+      </div>
+      <div class="why-c rv d1">
+        <div class="why-num">04</div>
+        <div class="why-icon">📍</div>
+        <h3>Παράδοση σε Εσάς</h3>
+        <p>Παραδίδουμε το αυτοκίνητο εκεί που βρίσκεστε — Αθήνα, Αεροδρόμιο, Πειραιά.</p>
+      </div>
+      <div class="why-c rv d2">
+        <div class="why-num">05</div>
+        <div class="why-icon">⚡</div>
+        <h3>Άμεση Εξυπηρέτηση</h3>
+        <p>Ένα τηλεφώνημα αρκεί. Διαθέσιμοι 7 ημέρες την εβδομάδα για άμεση εξυπηρέτηση.</p>
+      </div>
+      <div class="why-c rv d3">
+        <div class="why-num">06</div>
+        <div class="why-icon">⭐</div>
+        <h3>5 Αστέρια στο Google</h3>
+        <p>Αξιολόγηση 5/5 από τους πελάτες μας. Η εμπιστοσύνη σας είναι η μεγαλύτερη αμοιβή μας.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING QUICK FORM -->
+<section class="booking">
+  <div class="wrap">
+    <div class="rv"><div class="s-tag" style="--red:#e81c2e">Γρήγορη Κράτηση</div></div>
+    <div class="rv d1"><h2 class="s-title w">Κλείστε <span>τώρα</span></h2></div>
+    <div class="rv d2"><p class="s-sub w">Συμπληρώστε τη φόρμα και θα επικοινωνήσουμε άμεσα μαζί σας.</p></div>
+    <div class="book-form rv d2">
+      <div class="fg">
+        <label>Τόπος Παραλαβής</label>
+        <select>
+          <option>Αθήνα (Κορωπί)</option>
+          <option>Αεροδρόμιο Αθηνών</option>
+          <option>Πειραιάς</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Ημερομηνία Παραλαβής</label>
+        <input type="date"/>
+      </div>
+      <div class="fg">
+        <label>Ημερομηνία Επιστροφής</label>
+        <input type="date"/>
+      </div>
+      <a href="contact.html" class="book-btn">
+        Αναζήτηση
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET PREVIEW -->
+<section class="section">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:56px">
+      <div>
+        <div class="rv"><div class="s-tag">Στόλος</div></div>
+        <div class="rv d1"><h2 class="s-title">Τα <span>αυτοκίνητά</span> μας</h2></div>
+      </div>
+      <div class="rv d2"><a href="fleet.html" class="btn-dark">Δείτε όλα →</a></div>
+    </div>
+    <div class="fleet-grid">
+      <!-- Car 1 -->
+      <div class="car-c rv d1">
+        <div class="car-c-img">
+          <svg viewBox="0 0 300 160" style="width:85%">
+            <ellipse cx="150" cy="140" rx="130" ry="12" fill="rgba(0,0,0,.08)"/>
+            <path d="M25 115 Q25 95 42 90 L80 82 L110 48 Q122 36 145 34 L180 33 Q205 33 218 48 L242 82 L268 87 Q280 90 280 108 L280 115 Z" fill="#ddd"/>
+            <path d="M110 48 Q122 36 145 34 L180 33 Q205 33 218 48 L242 82 L80 82 Z" fill="#c8c8c8"/>
+            <path d="M118 80 L122 52 Q128 40 145 37 L180 36 Q200 36 210 50 L228 80 Z" fill="rgba(120,180,220,.25)" stroke="rgba(100,160,200,.3)" stroke-width="1"/>
+            <line x1="175" y1="37" x2="172" y2="80" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+            <rect x="25" y="104" width="255" height="5" rx="2.5" fill="rgba(232,28,46,.7)"/>
+            <circle cx="82" cy="120" r="22" fill="#888"/>
+            <circle cx="82" cy="120" r="13" fill="#aaa"/>
+            <circle cx="82" cy="120" r="5" fill="#666"/>
+            <circle cx="225" cy="120" r="22" fill="#888"/>
+            <circle cx="225" cy="120" r="13" fill="#aaa"/>
+            <circle cx="225" cy="120" r="5" fill="#666"/>
+          </svg>
+          <div class="car-cat">Οικονομικό</div>
+        </div>
+        <div class="car-c-body">
+          <div class="car-name">Compact Economy</div>
+          <div class="car-type-lbl">Μικρό • Οικονομικό • Εύκολο parking</div>
+          <div class="car-specs">
+            <span class="spec-i">⛽ Βενζίνη</span>
+            <span class="spec-i">⚙️ Χειροκίνητο</span>
+            <span class="spec-i">👤 5 θέσεις</span>
+          </div>
+          <div class="car-c-ft">
+            <div><div class="price-fr">από</div><div class="price-big">10€ <span>/ ημέρα</span></div></div>
+            <a href="contact.html" class="btn-dark">Κράτηση</a>
+          </div>
+        </div>
+      </div>
+      <!-- Car 2 -->
+      <div class="car-c rv d2">
+        <div class="car-c-img" style="background:linear-gradient(135deg,#e8e8e8,#d8d8d8)">
+          <svg viewBox="0 0 300 160" style="width:85%">
+            <ellipse cx="150" cy="142" rx="135" ry="12" fill="rgba(0,0,0,.07)"/>
+            <path d="M20 118 Q20 96 40 91 L85 82 L118 46 Q130 32 155 30 L185 29 Q210 29 224 46 L252 82 L272 88 Q283 92 283 110 L283 118 Z" fill="#2a2a2a"/>
+            <path d="M118 46 Q130 32 155 30 L185 29 Q210 29 224 46 L252 82 L85 82 Z" fill="#333"/>
+            <path d="M126 80 L130 50 Q136 37 155 33 L185 32 Q207 32 218 48 L238 80 Z" fill="rgba(80,120,180,.2)" stroke="rgba(100,150,200,.25)" stroke-width="1"/>
+            <line x1="172" y1="33" x2="169" y2="80" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+            <rect x="20" y="107" width="263" height="5" rx="2.5" fill="rgba(232,28,46,.8)"/>
+            <circle cx="85" cy="122" r="23" fill="#111" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+            <circle cx="85" cy="122" r="14" fill="#1a1a1a" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+            <circle cx="85" cy="122" r="5" fill="rgba(232,28,46,.5)"/>
+            <circle cx="228" cy="122" r="23" fill="#111" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+            <circle cx="228" cy="122" r="14" fill="#1a1a1a" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+            <circle cx="228" cy="122" r="5" fill="rgba(232,28,46,.5)"/>
+          </svg>
+          <div class="car-cat">Sedan</div>
+        </div>
+        <div class="car-c-body">
+          <div class="car-name">Midsize Sedan</div>
+          <div class="car-type-lbl">Άνετο • Ιδανικό για επαγγελματική χρήση</div>
+          <div class="car-specs">
+            <span class="spec-i">⛽ Ντίζελ</span>
+            <span class="spec-i">⚙️ Αυτόματο</span>
+            <span class="spec-i">👤 5 θέσεις</span>
+          </div>
+          <div class="car-c-ft">
+            <div><div class="price-fr">από</div><div class="price-big">18€ <span>/ ημέρα</span></div></div>
+            <a href="contact.html" class="btn-dark">Κράτηση</a>
+          </div>
+        </div>
+      </div>
+      <!-- Car 3 -->
+      <div class="car-c rv d3">
+        <div class="car-c-img" style="background:linear-gradient(135deg,#e0ede0,#d0e4d0)">
+          <svg viewBox="0 0 320 170" style="width:88%">
+            <ellipse cx="160" cy="148" rx="145" ry="13" fill="rgba(0,0,0,.07)"/>
+            <path d="M18 122 Q18 98 40 93 L92 83 L125 44 Q138 28 165 26 L200 25 Q228 25 242 44 L268 83 L288 90 Q302 95 302 115 L302 122 Z" fill="#f0f0f0"/>
+            <path d="M125 44 Q138 28 165 26 L200 25 Q228 25 242 44 L268 83 L92 83 Z" fill="#e0e0e0"/>
+            <path d="M133 81 L137 48 Q144 33 163 29 L200 28 Q222 28 234 46 L256 81 Z" fill="rgba(100,180,100,.18)" stroke="rgba(80,160,80,.2)" stroke-width="1"/>
+            <line x1="182" y1="29" x2="179" y2="81" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+            <rect x="18" y="111" width="284" height="5" rx="2.5" fill="rgba(232,28,46,.6)"/>
+            <circle cx="92" cy="127" r="24" fill="#888"/>
+            <circle cx="92" cy="127" r="15" fill="#aaa"/>
+            <circle cx="92" cy="127" r="5" fill="#666"/>
+            <circle cx="244" cy="127" r="24" fill="#888"/>
+            <circle cx="244" cy="127" r="15" fill="#aaa"/>
+            <circle cx="244" cy="127" r="5" fill="#666"/>
+          </svg>
+          <div class="car-cat">SUV</div>
+        </div>
+        <div class="car-c-body">
+          <div class="car-name">Compact SUV</div>
+          <div class="car-type-lbl">Ευρύχωρο • Ιδανικό για οικογένεια</div>
+          <div class="car-specs">
+            <span class="spec-i">⛽ Βενζίνη</span>
+            <span class="spec-i">⚙️ Αυτόματο</span>
+            <span class="spec-i">👤 5 θέσεις</span>
+          </div>
+          <div class="car-c-ft">
+            <div><div class="price-fr">από</div><div class="price-big">25€ <span>/ ημέρα</span></div></div>
+            <a href="contact.html" class="btn-dark">Κράτηση</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section class="section" style="background:#f5f5f5">
+  <div class="wrap">
+    <div class="rv"><div class="s-tag">Παράδοση</div></div>
+    <div class="rv d1"><h2 class="s-title">Εκεί που <span>χρειάζεστε</span></h2></div>
+    <div class="rv d2"><p class="s-sub">Παραδίδουμε το αυτοκίνητο στη θέση σας, γρήγορα και χωρίς επιπλέον κόπο.</p></div>
+    <div class="loc-grid">
+      <div class="loc-c rv d1">
+        <div class="loc-ico">🏙️</div>
+        <h3>Αθήνα</h3>
+        <p>Παράδοση εντός Αθηνών από το κατάστημά μας στο Κορωπί (Σπύρου Δάβαρη, Κορωπί 194 00). Γρήγορη και εύκολη εξυπηρέτηση.</p>
+      </div>
+      <div class="loc-c rv d2">
+        <div class="loc-ico">✈️</div>
+        <h3>Αεροδρόμιο Αθηνών</h3>
+        <p>Φτάνετε και το αυτοκίνητο σας περιμένει. Παράδοση και παραλαβή αυτοκινήτων στο Αεροδρόμιο «Ελευθέριος Βενιζέλος».</p>
+      </div>
+      <div class="loc-c rv d3">
+        <div class="loc-ico">⚓</div>
+        <h3>Πειραιάς</h3>
+        <p>Εξυπηρέτηση στο λιμάνι του Πειραιά για όσους φτάνουν με πλοίο ή χρειάζονται αυτοκίνητο στην περιοχή.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:0">
+      <div>
+        <div class="rv"><div class="s-tag">Κριτικές</div></div>
+        <div class="rv d1"><h2 class="s-title w">Τι λένε οι <span>πελάτες</span> μας</h2></div>
+      </div>
+      <div class="rv d2" style="display:flex;align-items:center;gap:12px">
+        <div style="text-align:right">
+          <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:900;color:#fff;line-height:1">5.0</div>
+          <div style="color:#fbbf24;font-size:.9rem;letter-spacing:2px">★★★★★</div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,.3);margin-top:3px">Google Reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rv-track-wrap" style="margin-top:48px">
+    <div class="rv-track">
+      <!-- Review 1 -->
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Η πιο αξιόπιστη μπορώ να πω και το προσωπικό πολύ ευγενικό και συννενόηση υπάρχει. Η τιμή ότι καλύτερο για τα αυτοκίνητα σε άριστη κατάσταση. Η καλύτερη επιλογή με εγγύηση!»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">R</div>
+          <div><div class="rv-name">Rina Sigma</div><div class="rv-date">Πριν 2 μήνες</div></div>
+        </div>
+      </div>
+      <!-- Review 2 -->
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Άψογο το προσωπικό, εξαιρετική εξυπηρέτηση και η πιο οικονομικές συζητήσιμες τιμές που δεν υπάρχουν αλλού! Εγγύηση 5/5 προτείνω αναμφίβολα.»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">E</div>
+          <div><div class="rv-name">Eirini rsk</div><div class="rv-date">Πριν 2 μήνες</div></div>
+        </div>
+      </div>
+      <!-- Review 3 -->
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Άψογοι σε όλα πολύ καλή εξυπηρέτηση!!! Το συστήνω ανεπιφύλακτα. Θα επιστρέψω σίγουρα για την επόμενη ενοικίαση.»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">E</div>
+          <div><div class="rv-name">Elias Pintzos</div><div class="rv-date">Πριν 3 μήνες</div></div>
+        </div>
+      </div>
+      <!-- Review 4 -->
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Εξαιρετική εμπειρία! Καθαρό αυτοκίνητο, ευγενικό προσωπικό και πολύ καλές τιμές. Χωρίς καμία κρυφή χρέωση, ακριβώς όπως υπόσχονται.»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">Μ</div>
+          <div><div class="rv-name">Μαρία Π.</div><div class="rv-date">Πριν 1 μήνα</div></div>
+        </div>
+      </div>
+      <!-- Review 5 -->
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Παρέδωσαν το αυτοκίνητο στο αεροδρόμιο ακριβώς στην ώρα τους. Πολύ επαγγελματική εταιρεία, σίγουρα θα τους ξαναχρησιμοποιήσω.»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">Δ</div>
+          <div><div class="rv-name">Δημήτρης Κ.</div><div class="rv-date">Πριν 3 εβδομάδες</div></div>
+        </div>
+      </div>
+      <!-- Duplicate for loop -->
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Η πιο αξιόπιστη μπορώ να πω και το προσωπικό πολύ ευγενικό και συννενόηση υπάρχει. Η τιμή ότι καλύτερο για τα αυτοκίνητα σε άριστη κατάσταση. Η καλύτερη επιλογή με εγγύηση!»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">R</div>
+          <div><div class="rv-name">Rina Sigma</div><div class="rv-date">Πριν 2 μήνες</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Άψογο το προσωπικό, εξαιρετική εξυπηρέτηση και η πιο οικονομικές συζητήσιμες τιμές που δεν υπάρχουν αλλού! Εγγύηση 5/5 προτείνω αναμφίβολα.»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">E</div>
+          <div><div class="rv-name">Eirini rsk</div><div class="rv-date">Πριν 2 μήνες</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Άψογοι σε όλα πολύ καλή εξυπηρέτηση!!! Το συστήνω ανεπιφύλακτα. Θα επιστρέψω σίγουρα για την επόμενη ενοικίαση.»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">E</div>
+          <div><div class="rv-name">Elias Pintzos</div><div class="rv-date">Πριν 3 μήνες</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Εξαιρετική εμπειρία! Καθαρό αυτοκίνητο, ευγενικό προσωπικό και πολύ καλές τιμές. Χωρίς καμία κρυφή χρέωση, ακριβώς όπως υπόσχονται.»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">Μ</div>
+          <div><div class="rv-name">Μαρία Π.</div><div class="rv-date">Πριν 1 μήνα</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">«Παρέδωσαν το αυτοκίνητο στο αεροδρόμιο ακριβώς στην ώρα τους. Πολύ επαγγελματική εταιρεία, σίγουρα θα τους ξαναχρησιμοποιήσω.»</p>
+        <div class="rv-author">
+          <div class="rv-avatar">Δ</div>
+          <div><div class="rv-name">Δημήτρης Κ.</div><div class="rv-date">Πριν 3 εβδομάδες</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-in">
+      <div>
+        <div class="cta-title">Θέλεις αυτοκίνητο<br/>σήμερα;</div>
+        <div class="cta-sub">Ξεκινάμε από <strong>10€ / ημέρα</strong> — Καλέστε για άμεση διαθεσιμότητα</div>
+      </div>
+      <div class="cta-acts">
+        <a href="tel:6983056936" class="btn-wt">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.91 5.91l.73-.73a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          698 305 6936
+        </a>
+        <a href="contact.html" class="btn-wt-out">Φόρμα Κράτησης →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <a href="index.html" class="nav-logo">Daily<span>Car</span><small>Rentals GR</small></a>
+        <p class="ft-desc">Οικονομικές και αξιόπιστες λύσεις ενοικίασης αυτοκινήτων για ιδιώτες και επαγγελματίες. Χωρίς πιστωτική κάρτα, χωρίς κρυφές χρεώσεις.</p>
+        <div class="ft-socials">
+          <a href="https://instagram.com/dailycar.rentalsgr" target="_blank" class="soc-btn" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="tel:6983056936" class="soc-btn" aria-label="Phone">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1.18h3a2 2 0 0 1 2 1.72c.2.77.45 1.52.7 2.81a2 2 0 0 1-.45 2.11l-.88.89a16 16 0 0 0 5.91 5.91l.73-.73a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Σελίδες</h4>
+        <a href="index.html">Αρχική</a>
+        <a href="fleet.html">Στόλος Αυτοκινήτων</a>
+        <a href="about.html">Σχετικά με εμάς</a>
+        <a href="contact.html">Επικοινωνία</a>
+      </div>
+      <div class="ft-col">
+        <h4>Υπηρεσίες</h4>
+        <a href="contact.html">Ενοικίαση Ημέρας</a>
+        <a href="contact.html">Εβδομαδιαία Ενοικίαση</a>
+        <a href="contact.html">Μηνιαία Μίσθωση</a>
+        <a href="contact.html">Εταιρικές Λύσεις</a>
+        <a href="contact.html">Airport Transfer</a>
+      </div>
+      <div class="ft-col">
+        <h4>Επικοινωνία</h4>
+        <div class="ft-ci">
+          <span class="ft-ci-ico">📍</span>
+          <div class="ft-ci-txt"><strong>Διεύθυνση</strong>Σπύρου Δάβαρη, Κορωπί 194 00</div>
+        </div>
+        <div class="ft-ci">
+          <span class="ft-ci-ico">📞</span>
+          <div class="ft-ci-txt"><strong>Τηλέφωνο Κρατήσεων</strong><a href="tel:6983056936" style="color:var(--red)">698 305 6936</a></div>
+        </div>
+        <div class="ft-ci">
+          <span class="ft-ci-ico">🕐</span>
+          <div class="ft-ci-txt"><strong>Ώρες Λειτουργίας</strong>Καθημερινά — Κλείνει 8:00 μ.μ.</div>
+        </div>
+        <div class="ft-ci">
+          <span class="ft-ci-ico">📸</span>
+          <div class="ft-ci-txt"><strong>Instagram</strong><a href="https://instagram.com/dailycar.rentalsgr" target="_blank" style="color:var(--red)">@dailycar.rentalsgr</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy">© 2025 Daily Car Rentals GR — Κορωπί, Αττική</span>
+      <div class="ft-rating"><span class="ft-stars">★★★★★</span> 5.0 Google Reviews</div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

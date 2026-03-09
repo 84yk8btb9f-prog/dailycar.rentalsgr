@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Κράτηση & Επικοινωνία — Daily Car Rentals GR</title>
+  <meta name="description" content="Κάντε κράτηση αυτοκινήτου ή επικοινωνήστε μαζί μας. Τηλέφωνο: 698 305 6936. Κορωπί, Αττική."/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23e81c2e'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Arial Black' fill='white'>D</text></svg>"/>
+  <style>
+    .map-embed { border-radius: 20px; overflow: hidden; border: 1px solid var(--gray-200); margin-top: 32px; }
+    .map-embed iframe { width: 100%; height: 300px; display: block; border: none; filter: grayscale(20%); }
+    .hours-table { width: 100%; margin-top: 10px; }
+    .hours-table tr td { font-size: .85rem; color: var(--gray-600); padding: 6px 0; }
+    .hours-table tr td:last-child { text-align: right; font-weight: 600; color: var(--black); font-family: var(--font-display); }
+    .hours-table tr.today td { color: var(--red); }
+    .hours-table tr.today td:last-child { color: var(--red); }
+    .phone-big { font-family: var(--font-display); font-size: 2rem; font-weight: 900; color: var(--black); letter-spacing: -1px; display: flex; align-items: center; gap: 12px; }
+    .phone-big a { color: var(--red); transition: color .2s; }
+    .phone-big a:hover { color: var(--red-dark); }
+    .faq-item { border-bottom: 1px solid var(--gray-200); }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; cursor: pointer; font-family: var(--font-display); font-weight: 600; font-size: 1rem; color: var(--black); gap: 16px; }
+    .faq-q:hover { color: var(--red); }
+    .faq-icon { font-size: 1.2rem; flex-shrink: 0; transition: transform .3s; }
+    .faq-a { font-size: .9rem; color: var(--gray-600); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height .4s var(--ease-out), padding .3s; }
+    .faq-a.open { max-height: 200px; padding-bottom: 20px; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-q { color: var(--red); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="nav-logo">Daily<span>Car</span><small>Rentals GR</small></a>
+    <div class="nav-links">
+      <a href="index.html">Αρχική</a>
+      <a href="fleet.html">Στόλος</a>
+      <a href="about.html">Σχετικά</a>
+      <a href="contact.html" class="nav-cta on" style="background:var(--red-dark)!important">Κράτηση →</a>
+    </div>
+    <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob-nav" id="mob-nav">
+  <a href="index.html">Αρχική</a>
+  <a href="fleet.html">Στόλος Αυτοκινήτων</a>
+  <a href="about.html">Σχετικά με εμάς</a>
+  <a href="contact.html" class="mob-cta">Κάντε Κράτηση →</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="pg-header">
+  <div class="pg-header-bg"></div>
+  <div class="pg-grid-bg"></div>
+  <div class="wrap pg-header-in">
+    <div class="breadcrumb"><a href="index.html">Αρχική</a><span class="breadcrumb-sep">›</span><span>Κράτηση & Επικοινωνία</span></div>
+    <div class="pg-header-tag">Άμεση εξυπηρέτηση</div>
+    <h1>Κάντε <span>Κράτηση</span></h1>
+    <p>Συμπληρώστε τη φόρμα ή καλέστε μας απευθείας. Απαντάμε άμεσα, κάθε μέρα.</p>
+  </div>
+</div>
+
+<!-- PHONE HIGHLIGHT -->
+<section style="background:var(--red);padding:40px 0">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;text-align:center">
+    <div>
+      <div style="font-family:var(--font-display);font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:8px">Τηλέφωνο Κρατήσεων</div>
+      <a href="tel:6983056936" style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;letter-spacing:-1.5px">698 305 6936</a>
+    </div>
+    <div style="width:1px;height:60px;background:rgba(255,255,255,.2)" class="hide-mobile"></div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:8px">Διαθεσιμότητα</div>
+      <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:#fff">Καθημερινά έως 8:00 μ.μ.</div>
+    </div>
+    <div style="width:1px;height:60px;background:rgba(255,255,255,.2)" class="hide-mobile"></div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:8px">Τιμές από</div>
+      <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:#fff">10€ / ημέρα</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="section">
+  <div class="wrap">
+    <div class="contact-grid">
+      <!-- Left info -->
+      <div>
+        <div class="rv"><div class="s-tag">Πληροφορίες</div></div>
+        <div class="rv d1"><h2 class="s-title">Βρείτε μας ή<br/><span>επικοινωνήστε</span></h2></div>
+
+        <div class="c-info-cards" style="margin-top:32px">
+          <div class="c-info-c rv d1">
+            <div class="c-info-ico">📞</div>
+            <div>
+              <div class="c-info-lbl">Τηλέφωνο Κρατήσεων</div>
+              <div class="c-info-val"><a href="tel:6983056936" style="color:var(--red)">698 305 6936</a></div>
+              <div class="c-info-sub">Διαθέσιμοι καθημερινά για άμεση εξυπηρέτηση</div>
+            </div>
+          </div>
+          <div class="c-info-c rv d2">
+            <div class="c-info-ico">📍</div>
+            <div>
+              <div class="c-info-lbl">Διεύθυνση Καταστήματος</div>
+              <div class="c-info-val">Σπύρου Δάβαρη, Κορωπί</div>
+              <div class="c-info-sub">Τ.Κ. 194 00 — Αττική</div>
+            </div>
+          </div>
+          <div class="c-info-c rv d3">
+            <div class="c-info-ico">🕐</div>
+            <div>
+              <div class="c-info-lbl">Ώρες Λειτουργίας</div>
+              <div class="c-info-val">Καθημερινά Ανοιχτά</div>
+              <div class="c-info-sub">Κλείνει 8:00 μ.μ.</div>
+            </div>
+          </div>
+          <div class="c-info-c rv d1">
+            <div class="c-info-ico">📸</div>
+            <div>
+              <div class="c-info-lbl">Instagram</div>
+              <div class="c-info-val"><a href="https://instagram.com/dailycar.rentalsgr" target="_blank" style="color:var(--red)">@dailycar.rentalsgr</a></div>
+              <div class="c-info-sub">Ακολουθήστε μας για προσφορές</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-embed rv">
+          <iframe
+            src="https://maps.google.com/maps?q=Σπύρου+Δάβαρη,+Κορωπί+194+00&output=embed"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Daily Car Rentals GR - Χάρτης">
+          </iframe>
+        </div>
+
+      </div>
+
+      <!-- Right form -->
+      <div class="c-form-wrap rv d2">
+        <h3>📋 Φόρμα Κράτησης</h3>
+        <form class="c-form" novalidate>
+          <div class="form-row">
+            <div class="fgl">
+              <label>Όνομα *</label>
+              <input type="text" placeholder="π.χ. Γιώργης" required/>
+            </div>
+            <div class="fgl">
+              <label>Επώνυμο *</label>
+              <input type="text" placeholder="π.χ. Παπαδόπουλος" required/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="fgl">
+              <label>Τηλέφωνο *</label>
+              <input type="tel" placeholder="69XXXXXXXX" required/>
+            </div>
+            <div class="fgl">
+              <label>Email</label>
+              <input type="email" placeholder="email@example.com"/>
+            </div>
+          </div>
+          <div class="fgl">
+            <label>Τόπος Παραλαβής *</label>
+            <select required>
+              <option value="" disabled selected>Επιλέξτε τοποθεσία...</option>
+              <option>Αθήνα / Κορωπί (κατάστημα)</option>
+              <option>Αεροδρόμιο Αθηνών — «Ελ. Βενιζέλος»</option>
+              <option>Πειραιάς</option>
+              <option>Άλλη τοποθεσία (αναφέρετε στα σχόλια)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="fgl">
+              <label>Ημερομηνία Παραλαβής *</label>
+              <input type="date" required/>
+            </div>
+            <div class="fgl">
+              <label>Ημερομηνία Επιστροφής *</label>
+              <input type="date" required/>
+            </div>
+          </div>
+          <div class="fgl">
+            <label>Κατηγορία Αυτοκινήτου</label>
+            <select>
+              <option value="" disabled selected>Επιλέξτε κατηγορία...</option>
+              <option>Οικονομικό Hatchback (~10€/ημέρα)</option>
+              <option>City Mini (~12€/ημέρα)</option>
+              <option>Family Sedan (~16€/ημέρα)</option>
+              <option>Executive Sedan (~18€/ημέρα)</option>
+              <option>Compact SUV (~25€/ημέρα)</option>
+              <option>Large SUV (~35€/ημέρα)</option>
+              <option>Van / Minivan (~40€/ημέρα)</option>
+              <option>Δεν έχω προτίμηση</option>
+            </select>
+          </div>
+          <div class="fgl">
+            <label>Σχόλια / Πρόσθετες Πληροφορίες</label>
+            <textarea placeholder="π.χ. ώρα παραλαβής, ειδικές απαιτήσεις, αριθμός πτήσης..."></textarea>
+          </div>
+          <button type="submit" class="c-submit">
+            Αποστολή Αίτησης Κράτησης
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <p style="font-size:.75rem;color:var(--gray-400);text-align:center;margin-top:14px;line-height:1.5">Θα σας επικοινωνήσουμε άμεσα για επιβεβαίωση.<br/>Για άμεση εξυπηρέτηση καλέστε <a href="tel:6983056936" style="color:var(--red)">698 305 6936</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background:#f5f5f5">
+  <div class="wrap">
+    <div style="max-width:800px;margin:0 auto">
+      <div class="rv" style="text-align:center"><div class="s-tag" style="justify-content:center">FAQ</div></div>
+      <div class="rv d1" style="text-align:center"><h2 class="s-title" style="text-align:center">Συχνές <span>Ερωτήσεις</span></h2></div>
+      <div style="margin-top:48px">
+        <div class="faq-item rv d1">
+          <div class="faq-q">Χρειάζεται πιστωτική κάρτα για κράτηση;<span class="faq-icon">+</span></div>
+          <div class="faq-a">Όχι! Δεν απαιτείται πιστωτική κάρτα. Αποδεχόμαστε μετρητά και χρεωστικές κάρτες. Αυτό είναι ένα από τα μεγαλύτερά μας πλεονεκτήματα.</div>
+        </div>
+        <div class="faq-item rv d2">
+          <div class="faq-q">Υπάρχουν κρυφές χρεώσεις;<span class="faq-icon">+</span></div>
+          <div class="faq-a">Απολύτως όχι. Πλήρης διαφάνεια στις τιμές — αυτό που συμφωνούμε είναι αυτό που πληρώνετε. Χωρίς εκπλήξεις, χωρίς επιπλέον χρεώσεις.</div>
+        </div>
+        <div class="faq-item rv d3">
+          <div class="faq-q">Παραδίδετε στο αεροδρόμιο;<span class="faq-icon">+</span></div>
+          <div class="faq-a">Ναι! Παραδίδουμε και παραλαμβάνουμε αυτοκίνητα στο Αεροδρόμιο «Ελευθέριος Βενιζέλος». Απλώς ενημερώστε μας για τον αριθμό πτήσης σας.</div>
+        </div>
+        <div class="faq-item rv d1">
+          <div class="faq-q">Ποια έγγραφα χρειάζονται;<span class="faq-icon">+</span></div>
+          <div class="faq-a">Απαιτείται ισχύουσα άδεια οδήγησης και ταυτότητα ή διαβατήριο. Για οδηγούς κάτω των 23 ετών ενδέχεται να ισχύουν πρόσθετες προϋποθέσεις.</div>
+        </div>
+        <div class="faq-item rv d2">
+          <div class="faq-q">Τι γίνεται σε περίπτωση βλάβης;<span class="faq-icon">+</span></div>
+          <div class="faq-a">Όλα τα αυτοκίνητά μας είναι πλήρως ασφαλισμένα. Σε περίπτωση βλάβης ή ατυχήματος, επικοινωνήστε αμέσως μαζί μας και θα σας εξυπηρετήσουμε άμεσα.</div>
+        </div>
+        <div class="faq-item rv d3">
+          <div class="faq-q">Μπορώ να επιστρέψω το αυτοκίνητο σε διαφορετική τοποθεσία;<span class="faq-icon">+</span></div>
+          <div class="faq-a">Ναι, με ειδική συμφωνία. Επικοινωνήστε μαζί μας για να συζητήσουμε τις επιλογές σας και το κόστος.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <a href="index.html" class="nav-logo">Daily<span>Car</span><small>Rentals GR</small></a>
+        <p class="ft-desc">Οικονομικές και αξιόπιστες λύσεις ενοικίασης αυτοκινήτων. Χωρίς πιστωτική κάρτα, χωρίς κρυφές χρεώσεις.</p>
+        <div class="ft-socials">
+          <a href="https://instagram.com/dailycar.rentalsgr" target="_blank" class="soc-btn" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Σελίδες</h4>
+        <a href="index.html">Αρχική</a>
+        <a href="fleet.html">Στόλος</a>
+        <a href="about.html">Σχετικά</a>
+        <a href="contact.html">Κράτηση</a>
+      </div>
+      <div class="ft-col">
+        <h4>Τοποθεσίες</h4>
+        <a href="contact.html">Αθήνα / Κορωπί</a>
+        <a href="contact.html">Αεροδρόμιο ΑΘΝ</a>
+        <a href="contact.html">Πειραιάς</a>
+      </div>
+      <div class="ft-col">
+        <h4>Επικοινωνία</h4>
+        <div class="ft-ci"><span class="ft-ci-ico">📍</span><div class="ft-ci-txt"><strong>Διεύθυνση</strong>Σπύρου Δάβαρη, Κορωπί 194 00</div></div>
+        <div class="ft-ci"><span class="ft-ci-ico">📞</span><div class="ft-ci-txt"><strong>Κρατήσεις</strong><a href="tel:6983056936" style="color:var(--red)">698 305 6936</a></div></div>
+        <div class="ft-ci"><span class="ft-ci-ico">🕐</span><div class="ft-ci-txt"><strong>Ώρες</strong>Καθημερινά — έως 8:00 μ.μ.</div></div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-copy">© 2025 Daily Car Rentals GR — Κορωπί, Αττική</span>
+      <div class="ft-rating"><span class="ft-stars">★★★★★</span> 5.0 Google Reviews</div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').classList.remove('open'); });
+      if (!wasOpen) { item.classList.add('open'); item.querySelector('.faq-a').classList.add('open'); }
+    });
+  });
+</script>
+</body>
+</html>
