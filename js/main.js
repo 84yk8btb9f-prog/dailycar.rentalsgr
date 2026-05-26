@@ -623,6 +623,10 @@ var TRANSLATIONS = {
     'loc-p2':'Arrive and your car is waiting. Vehicle delivery and pickup at "Eleftherios Venizelos" Airport.',
     'loc-h3':'Piraeus',
     'loc-p3':'Service at Piraeus port for those arriving by ferry or needing a car in the area.',
+    'loc-h4':'Rafina',
+    'loc-p4':'Delivery to Rafina port for ferry departures to the Cyclades and Evia. Perfect for island getaways.',
+    'loc-h5':'Lavrio',
+    'loc-p5':'Delivery to Lavrio port for ferries to Kea, Kythnos and other Cyclades. Close to Athens Airport.',
 
     'reviews-tag':'Reviews',
     'reviews-title':'What our <span>customers</span> say',
