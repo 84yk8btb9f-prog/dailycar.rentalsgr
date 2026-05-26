@@ -52,58 +52,82 @@
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-item.open .faq-q { color: var(--red); }
 
-    /* booking form layout */
-    .c-form-wrap { background: #fff; border-radius: 24px; border: 1px solid var(--gray-200); padding: 40px; box-shadow: 0 4px 40px rgba(0,0,0,.06); }
-    .c-form-wrap h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--black); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-    .c-form-wrap h3 svg { color: var(--red); }
-    .c-form-subtitle { font-size: .85rem; color: var(--gray-500); margin-bottom: 32px; }
+    /* ---- FORM WRAPPER ---- */
+    .c-form-wrap { background: #fff; border-radius: 24px; border: 1px solid var(--gray-200); padding: 36px 40px 40px; box-shadow: 0 4px 40px rgba(0,0,0,.06); }
+    @media (max-width: 640px) { .c-form-wrap { padding: 24px 20px 28px; } }
+    .cfh-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; color: var(--black); margin-bottom: 4px; }
+    .cfh-sub { font-size: .84rem; color: var(--gray-500); margin-bottom: 28px; }
 
-    .form-section { margin-bottom: 32px; }
-    .form-section-title { font-family: var(--font-display); font-size: .7rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gray-400); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; gap: 8px; }
-    .form-section-title span { background: var(--red); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: .65rem; font-weight: 800; }
+    /* ---- STEP BAR ---- */
+    .bk-steps { display: flex; align-items: center; margin-bottom: 36px; background: var(--gray-100); border-radius: 12px; padding: 4px; }
+    .bk-step { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 8px 6px; border-radius: 9px; transition: background .25s; }
+    .bk-step.active { background: #fff; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+    .bk-step-num { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--gray-300); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: .65rem; font-weight: 800; color: var(--gray-400); flex-shrink: 0; transition: all .25s; }
+    .bk-step.active .bk-step-num { border-color: var(--red); background: var(--red); color: #fff; }
+    .bk-step.done  .bk-step-num { border-color: #16a34a; background: #16a34a; color: #fff; }
+    .bk-step-label { font-family: var(--font-display); font-size: .72rem; font-weight: 600; color: var(--gray-400); white-space: nowrap; transition: color .25s; }
+    .bk-step.active .bk-step-label { color: var(--black); }
+    .bk-step.done  .bk-step-label { color: #16a34a; }
+    @media (max-width: 480px) { .bk-step-label { display: none; } }
 
-    /* insurance cards */
-    .ins-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 600px) { .ins-grid { grid-template-columns: 1fr; } }
-    .ins-card { border: 2px solid var(--gray-200); border-radius: 14px; padding: 16px; cursor: pointer; transition: border-color .2s, box-shadow .2s, background .2s; position: relative; }
+    /* ---- FORM SECTION DIVIDER ---- */
+    .fsec { margin-bottom: 32px; }
+    .fsec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+    .fsec-num { width: 26px; height: 26px; border-radius: 50%; background: var(--black); color: #fff; font-family: var(--font-display); font-size: .68rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .fsec-title { font-family: var(--font-display); font-size: .82rem; font-weight: 700; color: var(--black); letter-spacing: .3px; }
+    .fsec-line { flex: 1; height: 1px; background: var(--gray-200); }
+
+    /* ---- INSURANCE CARDS (stacked rows) ---- */
+    .ins-list { display: flex; flex-direction: column; gap: 8px; }
+    .ins-card { display: flex; align-items: center; gap: 14px; border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 14px 16px; cursor: pointer; transition: border-color .2s, background .2s, box-shadow .2s; position: relative; }
     .ins-card:hover { border-color: var(--gray-400); }
-    .ins-card.selected { border-color: var(--red); background: rgba(232,28,46,.04); box-shadow: 0 0 0 3px rgba(232,28,46,.1); }
+    .ins-card.selected { border-color: var(--red); background: rgba(232,28,46,.03); box-shadow: 0 0 0 3px rgba(232,28,46,.08); }
     .ins-card input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
-    .ins-check { position: absolute; top: 14px; right: 14px; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--gray-300); display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s; }
-    .ins-card.selected .ins-check { border-color: var(--red); background: var(--red); }
-    .ins-check-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; opacity: 0; transition: opacity .2s; }
-    .ins-card.selected .ins-check-dot { opacity: 1; }
-    .ins-card-name { font-family: var(--font-display); font-size: .85rem; font-weight: 700; color: var(--black); margin-bottom: 4px; padding-right: 28px; }
-    .ins-price { font-family: var(--font-display); font-size: 1.1rem; font-weight: 900; color: var(--red); margin-bottom: 6px; }
+    .ins-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--gray-300); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: border-color .2s, background .2s; }
+    .ins-card.selected .ins-radio { border-color: var(--red); background: var(--red); }
+    .ins-radio-dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; opacity: 0; transition: opacity .2s; }
+    .ins-card.selected .ins-radio-dot { opacity: 1; }
+    .ins-body { flex: 1; min-width: 0; }
+    .ins-card-name { font-family: var(--font-display); font-size: .88rem; font-weight: 700; color: var(--black); }
+    .ins-desc { font-size: .72rem; color: var(--gray-500); line-height: 1.5; margin-top: 2px; }
+    .ins-deposit { font-size: .7rem; color: var(--gray-400); margin-top: 3px; }
+    .ins-price-col { text-align: right; flex-shrink: 0; }
+    .ins-price { font-family: var(--font-display); font-size: 1rem; font-weight: 900; color: var(--red); white-space: nowrap; }
     .ins-price.free { color: #16a34a; }
-    .ins-desc { font-size: .73rem; color: var(--gray-500); line-height: 1.5; }
-    .ins-deposit { font-size: .72rem; color: var(--gray-400); margin-top: 6px; }
 
-    /* extras */
-    .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    @media (max-width: 500px) { .extras-grid { grid-template-columns: 1fr; } }
-    .extra-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 10px; cursor: pointer; transition: border-color .2s, background .2s; }
-    .extra-item:hover { border-color: var(--gray-400); background: #fafafa; }
-    .extra-item input:checked ~ .extra-label { color: var(--black); font-weight: 600; }
-    .extra-item:has(input:checked) { border-color: var(--red); background: rgba(232,28,46,.03); }
-    .extra-cb { accent-color: var(--red); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
+    /* ---- EXTRAS (compact list) ---- */
+    .fsec-sub { font-family: var(--font-display); font-size: .7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-400); margin: 22px 0 12px; }
+    .extras-list { display: flex; flex-direction: column; gap: 6px; }
+    .extra-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border: 1.5px solid var(--gray-200); border-radius: 10px; cursor: pointer; transition: border-color .2s, background .2s; }
+    .extra-item:hover { border-color: var(--gray-300); background: #fafafa; }
+    .extra-item:has(.extra-cb:checked) { border-color: var(--red); background: rgba(232,28,46,.03); }
+    .extra-item:has(.extra-cb:checked) .extra-label { color: var(--black); font-weight: 600; }
+    .extra-cb { accent-color: var(--red); width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; }
     .extra-label { flex: 1; font-size: .82rem; color: var(--gray-600); }
-    .extra-cost { font-family: var(--font-display); font-size: .8rem; font-weight: 700; color: var(--gray-500); white-space: nowrap; }
-    .extra-free { font-family: var(--font-display); font-size: .75rem; font-weight: 700; color: #16a34a; }
-    .extras-note { font-size: .75rem; color: var(--gray-400); margin-top: 10px; display: flex; align-items: center; gap: 6px; }
+    .extra-cost { font-family: var(--font-display); font-size: .78rem; font-weight: 700; color: var(--gray-500); background: var(--gray-100); border-radius: 5px; padding: 2px 8px; white-space: nowrap; }
+    .extra-free-badge { font-family: var(--font-display); font-size: .72rem; font-weight: 700; color: #16a34a; background: rgba(22,163,74,.08); border-radius: 5px; padding: 2px 8px; }
+    .extras-note { font-size: .74rem; color: var(--gray-400); margin-top: 10px; display: flex; align-items: center; gap: 6px; line-height: 1.5; }
 
-    /* price summary */
-    #price-summary { background: #0a0a0a; border-radius: 16px; padding: 24px; margin-bottom: 28px; }
-    .ps-head { font-family: var(--font-display); font-size: .65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 16px; }
-    .ps-line { display: flex; justify-content: space-between; align-items: baseline; font-size: .82rem; color: rgba(255,255,255,.65); margin-bottom: 8px; }
+    /* ---- PRICE SUMMARY ---- */
+    #price-summary { background: var(--black); border-radius: 16px; padding: 22px 24px; margin: 28px 0; animation: fadeIn .3s; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+    .ps-head { font-family: var(--font-display); font-size: .62rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 14px; }
+    .ps-line { display: flex; justify-content: space-between; align-items: baseline; font-size: .8rem; color: rgba(255,255,255,.6); margin-bottom: 7px; }
     .ps-line span:last-child { font-family: var(--font-display); font-weight: 600; color: rgba(255,255,255,.85); white-space: nowrap; margin-left: 12px; }
-    .ps-sep { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 14px 0; }
-    .ps-total { display: flex; justify-content: space-between; align-items: baseline; }
-    .ps-total-label { font-family: var(--font-display); font-size: .8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.6); }
-    .ps-total-amount { font-family: var(--font-display); font-size: 1.8rem; font-weight: 900; color: #fff; letter-spacing: -1px; }
-    .ps-note { font-size: .7rem; color: rgba(255,255,255,.3); margin-top: 10px; }
+    .ps-sep { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 12px 0; }
+    .ps-total { display: flex; justify-content: space-between; align-items: center; }
+    .ps-total-label { font-family: var(--font-display); font-size: .75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.5); }
+    .ps-total-amount { font-family: var(--font-display); font-size: 2rem; font-weight: 900; color: #fff; letter-spacing: -1px; }
+    .ps-note { font-size: .68rem; color: rgba(255,255,255,.28); margin-top: 10px; line-height: 1.5; }
 
-    /* info cards */
+    /* ---- SUBMIT ---- */
+    .c-submit { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--red); color: #fff; font-family: var(--font-display); font-size: 1rem; font-weight: 800; padding: 18px 28px; border-radius: 14px; border: none; cursor: pointer; transition: background .25s, transform .2s, box-shadow .25s; letter-spacing: .2px; }
+    .c-submit:hover { background: var(--red-light); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(232,28,46,.35); }
+    .c-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; box-shadow: none; }
+    .c-submit-note { font-size: .74rem; color: var(--gray-400); text-align: center; margin-top: 12px; line-height: 1.6; }
+    .form-send-error { background: rgba(220,38,38,.07); border: 1px solid rgba(220,38,38,.25); border-radius: 10px; padding: 12px 16px; font-size: .83rem; color: #dc2626; margin-bottom: 16px; }
+
+    /* ---- INFO CARDS ---- */
     .c-info-ico-svg { width: 36px; height: 36px; background: rgba(232,28,46,.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--red); flex-shrink: 0; }
   </style>
 </head>
@@ -243,11 +267,8 @@
 
       <!-- Right form -->
       <div class="c-form-wrap rv d2">
-        <h3>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          <span data-i18n="form-title">Φόρμα Κράτησης</span>
-        </h3>
-        <p class="c-form-subtitle" data-i18n="form-sub">Συμπληρώστε τα στοιχεία και θα επικοινωνήσουμε μαζί σας εντός 1 ώρας.</p>
+        <div class="cfh-title" data-i18n="form-title">Φόρμα Κράτησης</div>
+        <div class="cfh-sub" data-i18n="form-sub">Συμπληρώστε τα στοιχεία και θα επικοινωνήσουμε μαζί σας εντός 1 ώρας.</div>
 
         <!-- STEP INDICATOR -->
         <div class="bk-steps">
@@ -255,12 +276,10 @@
             <div class="bk-step-num">1</div>
             <div class="bk-step-label" data-i18n="step1-title">Αυτοκίνητο & Ημερομηνίες</div>
           </div>
-          <div class="bk-step-line"></div>
           <div class="bk-step">
             <div class="bk-step-num">2</div>
             <div class="bk-step-label" data-i18n="step2-title">Ασφάλιση & Extras</div>
           </div>
-          <div class="bk-step-line"></div>
           <div class="bk-step">
             <div class="bk-step-num">3</div>
             <div class="bk-step-label" data-i18n="step3-title">Στοιχεία Επικοινωνίας</div>
@@ -270,8 +289,8 @@
         <form class="c-form" id="booking-form" novalidate>
 
           <!-- Section 1: Vehicle & Dates -->
-          <div class="form-section">
-            <div class="form-section-title"><span>1</span> <span data-i18n="step1-title">Αυτοκίνητο & Ημερομηνίες</span></div>
+          <div class="fsec">
+            <div class="fsec-head"><div class="fsec-num">1</div><div class="fsec-title" data-i18n="step1-title">Αυτοκίνητο & Ημερομηνίες</div><div class="fsec-line"></div></div>
 
             <div class="fgl">
               <label>Τόπος Παραλαβής *</label>
@@ -342,50 +361,58 @@
           </div>
 
           <!-- Section 2: Insurance -->
-          <div class="form-section">
-            <div class="form-section-title"><span>2</span> <span data-i18n="step2-title">Ασφάλιση & Extras</span></div>
-            <div class="ins-grid">
+          <div class="fsec">
+            <div class="fsec-head"><div class="fsec-num">2</div><div class="fsec-title" data-i18n="step2-title">Ασφάλιση & Extras</div><div class="fsec-line"></div></div>
+            <div class="ins-list">
 
               <label class="ins-card selected" data-ins="basic">
                 <input type="radio" name="insurance" value="basic" checked/>
-                <div class="ins-check"><div class="ins-check-dot"></div></div>
-                <div class="ins-card-name">Βασική CDW/TP</div>
-                <div class="ins-price free">Συμπεριλαμβάνεται</div>
-                <div class="ins-desc">Κάλυψη ζημιάς αυτοκινήτου (CDW) + κλοπή (TP). Ισχύει εγγύηση ανάλογα με την κατηγορία.</div>
-                <div class="ins-deposit" id="ins-deposit-note">Εγγύηση: από €500</div>
+                <div class="ins-radio"><div class="ins-radio-dot"></div></div>
+                <div class="ins-body">
+                  <div class="ins-card-name">Βασική CDW/TP</div>
+                  <div class="ins-desc">Κάλυψη ζημιάς αυτοκινήτου (CDW) + κλοπή (TP). Ισχύει εγγύηση ανάλογα με την κατηγορία.</div>
+                  <div class="ins-deposit" id="ins-deposit-note">Εγγύηση: από €500</div>
+                </div>
+                <div class="ins-price-col"><div class="ins-price free">Συμπεριλαμβάνεται</div></div>
               </label>
 
               <label class="ins-card" data-ins="scdw">
                 <input type="radio" name="insurance" value="scdw"/>
-                <div class="ins-check"><div class="ins-check-dot"></div></div>
-                <div class="ins-card-name">SCDW</div>
-                <div class="ins-price" id="ins-price-scdw">+€8–16 / ημέρα</div>
-                <div class="ins-desc">Μειώνει ή μηδενίζει την ευθύνη εγγύησης για CDW & TP. Εκτός αμέλειας & παραβάσεων.</div>
+                <div class="ins-radio"><div class="ins-radio-dot"></div></div>
+                <div class="ins-body">
+                  <div class="ins-card-name">SCDW</div>
+                  <div class="ins-desc">Μειώνει ή μηδενίζει την ευθύνη εγγύησης για CDW & TP. Εκτός αμέλειας & παραβάσεων.</div>
+                </div>
+                <div class="ins-price-col"><div class="ins-price" id="ins-price-scdw">+€8–16/ημέρα</div></div>
               </label>
 
               <label class="ins-card" data-ins="full">
                 <input type="radio" name="insurance" value="full"/>
-                <div class="ins-check"><div class="ins-check-dot"></div></div>
-                <div class="ins-card-name">Πλήρης Κάλυψη</div>
-                <div class="ins-price" id="ins-price-full">+€14–28 / ημέρα</div>
-                <div class="ins-desc">Ευρεία κάλυψη χωρίς εγγύηση. Εκτός αμέλειας, λάθος καυσίμου, κλειδιών, προστίμων.</div>
+                <div class="ins-radio"><div class="ins-radio-dot"></div></div>
+                <div class="ins-body">
+                  <div class="ins-card-name">Πλήρης Κάλυψη</div>
+                  <div class="ins-desc">Ευρεία κάλυψη χωρίς εγγύηση. Εκτός αμέλειας, λάθος καυσίμου, κλειδιών, προστίμων.</div>
+                </div>
+                <div class="ins-price-col"><div class="ins-price" id="ins-price-full">+€14–28/ημέρα</div></div>
               </label>
 
               <label class="ins-card" data-ins="full_glass">
                 <input type="radio" name="insurance" value="full_glass"/>
-                <div class="ins-check"><div class="ins-check-dot"></div></div>
-                <div class="ins-card-name">Πλήρης + Τζάμια & Ελαστικά</div>
-                <div class="ins-price" id="ins-price-full_glass">+€19–38 / ημέρα</div>
-                <div class="ins-desc">Ως ανωτέρω, επιπλέον κάλυψη τζαμιών, ελαστικών & ζαντών. Μέγιστη προστασία.</div>
+                <div class="ins-radio"><div class="ins-radio-dot"></div></div>
+                <div class="ins-body">
+                  <div class="ins-card-name">Πλήρης + Τζάμια & Ελαστικά</div>
+                  <div class="ins-desc">Ως ανωτέρω, επιπλέον κάλυψη τζαμιών, ελαστικών & ζαντών. Μέγιστη προστασία.</div>
+                </div>
+                <div class="ins-price-col"><div class="ins-price" id="ins-price-full_glass">+€19–38/ημέρα</div></div>
               </label>
 
             </div>
           </div>
 
           <!-- Section 3: Extras -->
-          <div class="form-section">
-            <div class="form-section-title"><span>3</span> Πρόσθετες Υπηρεσίες</div>
-            <div class="extras-grid">
+          <div class="fsec">
+            <div class="fsec-head"><div class="fsec-num">3</div><div class="fsec-title">Πρόσθετες Υπηρεσίες</div><div class="fsec-line"></div></div>
+            <div class="extras-list">
               <label class="extra-item">
                 <input type="checkbox" class="extra-cb" name="extras" value="booster"/>
                 <span class="extra-label">Παιδικό κάθισμα (booster)</span>
@@ -441,8 +468,8 @@
           </div>
 
           <!-- Section 4: Contact Details -->
-          <div class="form-section">
-            <div class="form-section-title"><span>4</span> Στοιχεία Επικοινωνίας</div>
+          <div class="fsec">
+            <div class="fsec-head"><div class="fsec-num">4</div><div class="fsec-title">Στοιχεία Επικοινωνίας</div><div class="fsec-line"></div></div>
             <div class="form-row">
               <div class="fgl">
                 <label>Όνομα *</label>
