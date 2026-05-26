@@ -710,6 +710,36 @@ var TRANSLATIONS = {
     'faq-a5':'All our vehicles are fully insured. In case of breakdown or accident, contact us immediately and we\'ll assist you right away.',
     'faq-q6':'Can I return the car to a different location?',
     'faq-a6':'Yes, with a special arrangement. Contact us to discuss your options and the cost.',
+
+    'info-tag':'Information',
+    'info-h2':'Find us or<br/><span>get in touch</span>',
+
+    'about-bc':'About',
+    'about-tag':'Our story',
+    'about-h1':'About <span>us</span>',
+    'about-p':'A company that puts the customer first — with transparent pricing, reliable vehicles and immediate service.',
+    'about-who-tag':'Who we are',
+    'about-story-1':'<strong>Daily Car Rentals GR</strong> offers affordable and reliable car rental solutions for individuals and businesses throughout Attica.',
+    'about-story-2':'We are based in <strong>Koropi</strong> and serve customers in <strong>Athens, Athens Airport "Eleftherios Venizelos"</strong> and <strong>Piraeus</strong>, with delivery directly to your location.',
+    'about-story-3':'We don\'t require a credit card and have no hidden fees — just <strong>clean vehicles, honest prices and immediate service</strong>.',
+    'about-cta-btn':'Book now →',
+    'about-vals-tag':'Our values',
+    'about-vals-h2':'What sets us <span>apart</span>',
+    'val-h1':'Trust',
+    'val-p1':'Every customer knows exactly what they pay. No surprises on the bill — only the price we agreed.',
+    'val-h2':'Quality',
+    'val-p2':'Our cars are regularly inspected, fully insured and delivered to our customers clean and in excellent condition.',
+    'val-h3':'Speed',
+    'val-p3':'If you need a car today, we can serve you in minimal time. One call is enough.',
+    'val-h4':'Affordable Prices',
+    'val-p4':'We believe mobility should not be a privilege for few. That\'s why we start from just €17 per day.',
+    'about-promise-tag':'Our Promise',
+    'about-promise-h2':'Full <span>transparency</span> at every step',
+    'about-promise-p':'From the moment you call us to the delivery of the vehicle — service without surprises, without bureaucracy.',
+    'about-cta-title':'Start today',
+    'about-cta-sub':'Call for immediate service — <strong>698 305 6936</strong>',
+    'about-cta-call':'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.91 5.91l.73-.73a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call now',
+    'about-cta-form':'Booking form →',
   }
 };
 
@@ -782,10 +812,108 @@ function translateDynamicContent(lang) {
     'π.χ. ώρα παραλαβής, αριθμός πτήσης, ειδικές απαιτήσεις...': 'e.g. pickup time, flight number, special requirements...'
   };
   document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(function(el) {
-    if (el.dataset.i18n) return; // already handled by data-i18n system
+    if (el.dataset.i18n) return;
     var orig = el.dataset.origPh || el.placeholder;
     if (!el.dataset.origPh) el.dataset.origPh = orig;
     el.placeholder = en ? (phMap[orig] || orig) : orig;
+  });
+
+  // ── Footer (all pages) ──────────────────────────────────────────────────
+  var txtMap = {
+    'Σελίδες':'Pages', 'Τοποθεσίες':'Locations', 'Υπηρεσίες':'Services', 'Επικοινωνία':'Contact',
+    'Αρχική':'Home', 'Στόλος':'Fleet', 'Σχετικά':'About', 'Κράτηση':'Booking',
+    'Αθήνα / Κορωπί':'Athens / Koropi', 'Αεροδρόμιο ΑΘΝ':'Athens Airport ATH', 'Πειραιάς':'Piraeus',
+    'Ημερήσια Ενοικίαση':'Daily Rental', 'Εβδομαδιαία':'Weekly Rental', 'Μηνιαία Μίσθωση':'Monthly Lease',
+    'Διεύθυνση':'Address', 'Κρατήσεις':'Bookings', 'Ώρες':'Hours',
+    'Καθημερινά — 08:00–22:00':'Daily — 08:00–22:00'
+  };
+  document.querySelectorAll('.ft-col h4, .ft-col a, .ft-ci-txt strong').forEach(function(el) {
+    var orig = el.dataset.origText || el.textContent.trim();
+    if (!el.dataset.origText) el.dataset.origText = orig;
+    el.textContent = en ? (txtMap[orig] || orig) : orig;
+  });
+  document.querySelectorAll('.ft-desc').forEach(function(el) {
+    var orig = el.dataset.origText || el.textContent.trim();
+    if (!el.dataset.origText) el.dataset.origText = orig;
+    el.textContent = en ? 'Affordable and reliable car rental. No credit card required, no hidden fees.' : orig;
+  });
+  document.querySelectorAll('.ft-copy').forEach(function(el) {
+    var orig = el.dataset.origText || el.textContent.trim();
+    if (!el.dataset.origText) el.dataset.origText = orig;
+    el.textContent = en ? orig.replace('Κορωπί, Αττική','Koropi, Attica') : orig;
+  });
+
+  // ── Contact page: info panel (left column) ──────────────────────────────
+  var infoMap = {
+    'Πληροφορίες':'Information',
+    'Τηλέφωνο Κρατήσεων':'Booking Phone',
+    'Διαθέσιμοι καθημερινά 08:00–22:00':'Available daily 08:00–22:00',
+    'Απάντηση εντός 1 ώρας (08:00–22:00)':'Reply within 1 hour (08:00–22:00)',
+    'Διεύθυνση Καταστήματος':'Store Address',
+    'Ώρες Λειτουργίας':'Opening Hours',
+    'Καθημερινά Ανοιχτά':'Open Daily',
+    '08:00–22:00 — 7 ημέρες την εβδομάδα':'08:00–22:00 — 7 days a week',
+    'Ακολουθήστε μας για προσφορές':'Follow us for offers'
+  };
+  document.querySelectorAll('.c-info-lbl, .c-info-sub, .c-info-val:not(:has(a))').forEach(function(el) {
+    var orig = el.dataset.origText || el.textContent.trim();
+    if (!el.dataset.origText) el.dataset.origText = orig;
+    if (infoMap[orig]) el.textContent = en ? infoMap[orig] : orig;
+  });
+  document.querySelectorAll('.s-tag').forEach(function(el) {
+    var orig = el.dataset.origText || el.textContent.trim();
+    if (!el.dataset.origText) el.dataset.origText = orig;
+    var stMap = {'Πληροφορίες':'Information','Ποιοι είμαστε':'Who we are','Οι αξίες μας':'Our values','Η Υπόσχεσή μας':'Our Promise','Google Reviews':'Google Reviews'};
+    if (stMap[orig]) el.textContent = en ? stMap[orig] : orig;
+  });
+
+  // ── About page ──────────────────────────────────────────────────────────
+  var aboutMap = {
+    'Τιμή εκκίνησης ανά ημέρα':'Starting price per day',
+    'Αξιολόγηση Google':'Google Rating',
+    'Αυτά που μας ξεχωρίζουν':'What sets us apart',
+    'Εμπιστοσύνη':'Trust',
+    'Ποιότητα':'Quality',
+    'Ταχύτητα':'Speed',
+    'Προσιτές Τιμές':'Affordable Prices',
+    'Πλήρης διαφάνεια σε κάθε βήμα':'Full transparency at every step',
+    'Καλέστε':'Call',
+    'Ένα τηλεφώνημα αρκεί':'One call is enough',
+    'Επιλέξτε':'Choose',
+    'Το αυτοκίνητό σας':'Your vehicle',
+    'Παραλαβή':'Pickup',
+    'Delivery στη θέση σας':'Delivery to your location',
+    'Οδηγείτε':'Drive',
+    'Χωρίς άγχος':'Stress-free',
+    'Τι λένε οι πελάτες μας':'What our customers say',
+    'Βασίζεται σε 5 κριτικές':'Based on 5 reviews',
+    'Ξεκινήστε σήμερα':'Start today',
+    'Κλείστε τώρα →':'Book now →',
+    'Καλέστε τώρα':'Call now',
+    'Φόρμα κράτησης →':'Booking form →'
+  };
+  document.querySelectorAll('.a-stat-lbl, .val-c h3, .s-title, .s-sub, .cta-title, .cta-sub, .btn-wt, .btn-wt-out, .a-stat-num + .a-stat-lbl').forEach(function(el) {
+    var orig = el.dataset.origText || el.textContent.trim();
+    if (!el.dataset.origText) el.dataset.origText = orig;
+    if (aboutMap[orig]) el.textContent = en ? aboutMap[orig] : orig;
+  });
+  document.querySelectorAll('.a-stat-lbl').forEach(function(el) {
+    var orig = el.dataset.origText || el.textContent.trim();
+    if (!el.dataset.origText) el.dataset.origText = orig;
+    if (aboutMap[orig]) el.textContent = en ? aboutMap[orig] : orig;
+  });
+  // Step cards in promise section
+  document.querySelectorAll('[style*="font-weight:700;color:#fff"]').forEach(function(el) {
+    if (el.tagName !== 'DIV') return;
+    var orig = el.dataset.origText || el.textContent.trim();
+    if (!el.dataset.origText) el.dataset.origText = orig;
+    if (aboutMap[orig]) el.textContent = en ? aboutMap[orig] : orig;
+  });
+  document.querySelectorAll('[style*="color:rgba(255,255,255,.4)"]').forEach(function(el) {
+    if (el.tagName !== 'DIV') return;
+    var orig = el.dataset.origText || el.textContent.trim();
+    if (!el.dataset.origText) el.dataset.origText = orig;
+    if (aboutMap[orig]) el.textContent = en ? aboutMap[orig] : orig;
   });
 }
 
