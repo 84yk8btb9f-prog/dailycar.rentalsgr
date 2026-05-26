@@ -139,8 +139,8 @@
       <a href="fleet.html" data-i18n="nav-fleet">Στόλος</a>
       <a href="about.html" data-i18n="nav-about">Σχετικά</a>
       <div style="display:inline-flex;align-items:center;gap:2px;margin-left:14px;margin-right:2px;flex-shrink:0">
-        <button data-lang="el" class="lang-btn active" style="font-family:var(--font-display);font-size:.78rem;font-weight:800;letter-spacing:.5px;padding:5px 11px;background:var(--red);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:opacity .2s">ΕΛ</button>
-        <button data-lang="en" class="lang-btn" style="font-family:var(--font-display);font-size:.78rem;font-weight:800;letter-spacing:.5px;padding:5px 11px;background:transparent;color:rgba(255,255,255,.6);border:none;border-radius:6px;cursor:pointer;transition:opacity .2s">EN</button>
+        <button type="button" onclick="setLang(this.dataset.lang)" data-lang="el" class="lang-btn active" style="font-family:var(--font-display);font-size:.78rem;font-weight:800;letter-spacing:.5px;padding:5px 11px;background:var(--red);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:opacity .2s">ΕΛ</button>
+        <button type="button" onclick="setLang(this.dataset.lang)" data-lang="en" class="lang-btn" style="font-family:var(--font-display);font-size:.78rem;font-weight:800;letter-spacing:.5px;padding:5px 11px;background:transparent;color:rgba(255,255,255,.6);border:none;border-radius:6px;cursor:pointer;transition:opacity .2s">EN</button>
       </div>
       <a href="contact.html" class="nav-cta on" style="background:var(--red-dark)!important" data-i18n="nav-book">Κράτηση →</a>
     </div>
