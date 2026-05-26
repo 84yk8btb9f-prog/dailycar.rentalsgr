@@ -242,6 +242,7 @@
       <button class="tab-btn active" data-tab="bookings">Κρατήσεις</button>
       <button class="tab-btn" data-tab="availability">Διαθεσιμότητα</button>
       <button class="tab-btn" data-tab="blocked">Αποκλεισμός Ημερών</button>
+      <button class="tab-btn" data-tab="testimonials">Μαρτυρίες</button>
     </div>
 
     <!-- TAB: BOOKINGS -->
@@ -333,8 +334,57 @@
         <div class="section-title">Αποκλεισμένες Περίοδοι</div>
       </div>
       <div class="blocked-list" id="blocked-list"></div>
+    <!-- TAB: TESTIMONIALS -->
+    <div class="tab-panel" id="tab-testimonials">
+      <div class="block-form">
+        <h3>Προσθήκη Μαρτυρίας</h3>
+        <div class="block-fields" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">
+          <div class="bfl">
+            <label>Όνομα *</label>
+            <input type="text" id="tm-name" placeholder="π.χ. Γιώργης Π."/>
+          </div>
+          <div class="bfl">
+            <label>Τοποθεσία / Πόλη</label>
+            <input type="text" id="tm-location" placeholder="π.χ. Αθήνα"/>
+          </div>
+          <div class="bfl">
+            <label>Βαθμολογία</label>
+            <select id="tm-stars">
+              <option value="5">★★★★★  (5 αστέρια)</option>
+              <option value="4">★★★★☆  (4 αστέρια)</option>
+              <option value="3">★★★☆☆  (3 αστέρια)</option>
+            </select>
+          </div>
+          <div class="bfl">
+            <label>Αυτοκίνητο (προαιρ.)</label>
+            <input type="text" id="tm-car" placeholder="π.χ. Toyota Aygo (A)"/>
+          </div>
+          <div class="bfl">
+            <label>Ημερομηνία</label>
+            <input type="date" id="tm-date"/>
+          </div>
+          <div class="bfl" style="display:flex;align-items:center;gap:10px;padding-top:20px">
+            <input type="checkbox" id="tm-featured" style="width:16px;height:16px;accent-color:var(--red)"/>
+            <label for="tm-featured" style="margin:0;font-size:.82rem;font-weight:600;color:var(--black)">Εμφάνιση στο site</label>
+          </div>
+        </div>
+        <div class="bfl" style="grid-column:1/-1;margin-top:8px">
+          <label>Κείμενο Μαρτυρίας *</label>
+          <textarea id="tm-text" placeholder="Η εμπειρία του πελάτη..." style="width:100%;min-height:90px;border:1px solid var(--g200);border-radius:8px;padding:10px 12px;font-size:.85rem;font-family:var(--font);resize:vertical;box-sizing:border-box"></textarea>
+        </div>
+        <button class="btn-block-add" id="btn-tm-add" style="margin-top:12px">+ Προσθήκη Μαρτυρίας</button>
+        <div style="margin-top:10px;font-size:.75rem;color:var(--g400);line-height:1.6">
+          Τσεκάρετε "Εμφάνιση στο site" για να εμφανίζεται η μαρτυρία στην αρχική σελίδα — ανοίξτε το site στον ίδιο browser αφού την αποθηκεύσετε.
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:0">
+        <div class="section-title">Αποθηκευμένες Μαρτυρίες</div>
+      </div>
+      <div class="blocked-list" id="testimonials-list"></div>
     </div>
 
+    </div>
   </div>
 </div>
 
@@ -436,6 +486,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
     if (btn.dataset.tab === 'availability') renderAvailability();
     if (btn.dataset.tab === 'blocked') renderBlocked();
+    if (btn.dataset.tab === 'testimonials') renderTestimonials();
   });
 });
 
@@ -635,6 +686,77 @@ document.getElementById('btn-block-add').addEventListener('click', () => {
   document.getElementById('bl-to').value = '';
   document.getElementById('bl-note').value = '';
   renderBlocked();
+});
+
+/* ---- TESTIMONIALS ---- */
+function getTestimonials() { return JSON.parse(localStorage.getItem('dcr_testimonials') || '[]'); }
+function saveTestimonials(t) { localStorage.setItem('dcr_testimonials', JSON.stringify(t)); }
+
+function renderTestimonials() {
+  const list = getTestimonials();
+  const el   = document.getElementById('testimonials-list');
+  if (!list.length) {
+    el.innerHTML = '<div style="padding:32px;text-align:center;color:var(--g400);font-size:.85rem">Δεν υπάρχουν μαρτυρίες ακόμα. Προσθέστε την πρώτη!</div>';
+    return;
+  }
+  el.innerHTML = list.map((t, i) => `
+    <div class="blocked-row" style="align-items:flex-start;gap:16px">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
+          <span style="font-family:var(--font);font-weight:700;font-size:.9rem">${t.name}</span>
+          ${t.location ? `<span style="font-size:.75rem;color:var(--g400)">&middot; ${t.location}</span>` : ''}
+          <span style="color:#fbbf24;font-size:.78rem">${'★'.repeat(t.stars)}</span>
+          ${t.featured
+            ? '<span style="font-size:.62rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:#f0fdf4;color:#16a34a;padding:2px 8px;border-radius:4px">Live on site</span>'
+            : '<span style="font-size:.62rem;font-weight:600;background:var(--g100);color:var(--g400);padding:2px 8px;border-radius:4px">Hidden</span>'}
+        </div>
+        <div style="font-size:.82rem;color:var(--g600);line-height:1.65;margin-bottom:5px">«${t.text}»</div>
+        <div style="font-size:.72rem;color:var(--g300)">
+          ${t.car ? `${t.car}` : ''}${t.car && t.date ? ' &nbsp;·&nbsp; ' : ''}${t.date ? fmtDate(t.date) : ''}
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;flex-shrink:0;margin-top:2px">
+        <button class="btn-sm" onclick="toggleFeatured(${i})" style="background:${t.featured ? 'var(--g100)' : '#f0fdf4'};color:${t.featured ? 'var(--g500)' : '#16a34a'};border:1px solid ${t.featured ? 'var(--g200)' : '#bbf7d0'}">${t.featured ? 'Απόκρυψη' : 'Δημοσίευση'}</button>
+        <button class="btn-sm btn-delete" onclick="deleteTestimonial(${i})">&#x2715;</button>
+      </div>
+    </div>`).join('');
+}
+
+function toggleFeatured(i) {
+  const list = getTestimonials();
+  if (list[i]) { list[i].featured = !list[i].featured; saveTestimonials(list); renderTestimonials(); }
+}
+
+function deleteTestimonial(i) {
+  if (!confirm('Διαγραφή μαρτυρίας;')) return;
+  const list = getTestimonials();
+  list.splice(i, 1);
+  saveTestimonials(list);
+  renderTestimonials();
+}
+
+document.getElementById('btn-tm-add').addEventListener('click', () => {
+  const name = document.getElementById('tm-name').value.trim();
+  const text = document.getElementById('tm-text').value.trim();
+  if (!name || !text) { alert('Συμπληρώστε τουλάχιστον Όνομα και Κείμενο.'); return; }
+  const t = {
+    id:       'TM-' + Date.now(),
+    name,
+    location: document.getElementById('tm-location').value.trim(),
+    stars:    parseInt(document.getElementById('tm-stars').value, 10),
+    car:      document.getElementById('tm-car').value.trim(),
+    text,
+    date:     document.getElementById('tm-date').value,
+    featured: document.getElementById('tm-featured').checked,
+  };
+  const list = getTestimonials();
+  list.unshift(t);
+  saveTestimonials(list);
+  ['tm-name','tm-location','tm-car','tm-text'].forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('tm-stars').value   = '5';
+  document.getElementById('tm-date').value    = '';
+  document.getElementById('tm-featured').checked = false;
+  renderTestimonials();
 });
 
 /* ---- SEED DEMO DATA (remove after testing) ---- */

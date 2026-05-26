@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23e81c2e'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-size='18' font-family='Arial Black' fill='white'>D</text></svg>"/>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -293,7 +292,7 @@
             <div class="fsec-head"><div class="fsec-num">1</div><div class="fsec-title" data-i18n="step1-title">Αυτοκίνητο & Ημερομηνίες</div><div class="fsec-line"></div></div>
 
             <div class="fgl">
-              <label>Τόπος Παραλαβής *</label>
+              <label data-i18n="lbl-location">Τόπος Παραλαβής *</label>
               <select name="pickup_location" required>
                 <option value="" disabled selected>Επιλέξτε τοποθεσία...</option>
                 <option value="Αθήνα / Κορωπί (κατάστημα)">Αθήνα / Κορωπί (κατάστημα)</option>
@@ -306,12 +305,12 @@
 
             <div class="form-row">
               <div class="fgl">
-                <label>Ημ/νία Παραλαβής *</label>
+                <label data-i18n="lbl-pickup">Ημ/νία Παραλαβής *</label>
                 <input type="date" name="pickup_date" class="pickup-date" required/>
                 <div class="field-err" id="err-pickup_date"></div>
               </div>
               <div class="fgl">
-                <label>Ημ/νία Επιστροφής *</label>
+                <label data-i18n="lbl-return">Ημ/νία Επιστροφής *</label>
                 <input type="date" name="return_date" class="return-date" required/>
                 <div class="field-err" id="err-return_date"></div>
               </div>
@@ -369,8 +368,8 @@
                 <input type="radio" name="insurance" value="basic" checked/>
                 <div class="ins-radio"><div class="ins-radio-dot"></div></div>
                 <div class="ins-body">
-                  <div class="ins-card-name">Βασική CDW/TP</div>
-                  <div class="ins-desc">Κάλυψη ζημιάς αυτοκινήτου (CDW) + κλοπή (TP). Ισχύει εγγύηση ανάλογα με την κατηγορία.</div>
+                  <div class="ins-card-name" data-i18n="ins-basic-name">Βασική CDW/TP</div>
+                  <div class="ins-desc" data-i18n="ins-basic-desc">Κάλυψη ζημιάς αυτοκινήτου (CDW) + κλοπή (TP). Ισχύει εγγύηση ανάλογα με την κατηγορία.</div>
                   <div class="ins-deposit" id="ins-deposit-note">Εγγύηση: από €500</div>
                 </div>
                 <div class="ins-price-col"><div class="ins-price free">Συμπεριλαμβάνεται</div></div>
@@ -380,8 +379,8 @@
                 <input type="radio" name="insurance" value="scdw"/>
                 <div class="ins-radio"><div class="ins-radio-dot"></div></div>
                 <div class="ins-body">
-                  <div class="ins-card-name">SCDW</div>
-                  <div class="ins-desc">Μειώνει ή μηδενίζει την ευθύνη εγγύησης για CDW & TP. Εκτός αμέλειας & παραβάσεων.</div>
+                  <div class="ins-card-name" data-i18n="ins-scdw-name">SCDW</div>
+                  <div class="ins-desc" data-i18n="ins-scdw-desc">Μειώνει ή μηδενίζει την ευθύνη εγγύησης για CDW & TP. Εκτός αμέλειας & παραβάσεων.</div>
                 </div>
                 <div class="ins-price-col"><div class="ins-price" id="ins-price-scdw">+€8–16/ημέρα</div></div>
               </label>
@@ -390,8 +389,8 @@
                 <input type="radio" name="insurance" value="full"/>
                 <div class="ins-radio"><div class="ins-radio-dot"></div></div>
                 <div class="ins-body">
-                  <div class="ins-card-name">Πλήρης Κάλυψη</div>
-                  <div class="ins-desc">Ευρεία κάλυψη χωρίς εγγύηση. Εκτός αμέλειας, λάθος καυσίμου, κλειδιών, προστίμων.</div>
+                  <div class="ins-card-name" data-i18n="ins-full-name">Πλήρης Κάλυψη</div>
+                  <div class="ins-desc" data-i18n="ins-full-desc">Ευρεία κάλυψη χωρίς εγγύηση. Εκτός αμέλειας, λάθος καυσίμου, κλειδιών, προστίμων.</div>
                 </div>
                 <div class="ins-price-col"><div class="ins-price" id="ins-price-full">+€14–28/ημέρα</div></div>
               </label>
@@ -400,8 +399,8 @@
                 <input type="radio" name="insurance" value="full_glass"/>
                 <div class="ins-radio"><div class="ins-radio-dot"></div></div>
                 <div class="ins-body">
-                  <div class="ins-card-name">Πλήρης + Τζάμια & Ελαστικά</div>
-                  <div class="ins-desc">Ως ανωτέρω, επιπλέον κάλυψη τζαμιών, ελαστικών & ζαντών. Μέγιστη προστασία.</div>
+                  <div class="ins-card-name" data-i18n="ins-glass-name">Πλήρης + Τζάμια & Ελαστικά</div>
+                  <div class="ins-desc" data-i18n="ins-glass-desc">Ως ανωτέρω, επιπλέον κάλυψη τζαμιών, ελαστικών & ζαντών. Μέγιστη προστασία.</div>
                 </div>
                 <div class="ins-price-col"><div class="ins-price" id="ins-price-full_glass">+€19–38/ημέρα</div></div>
               </label>
@@ -411,47 +410,47 @@
 
           <!-- Section 3: Extras -->
           <div class="fsec">
-            <div class="fsec-head"><div class="fsec-num">3</div><div class="fsec-title">Πρόσθετες Υπηρεσίες</div><div class="fsec-line"></div></div>
+            <div class="fsec-head"><div class="fsec-num">3</div><div class="fsec-title" data-i18n="sec3-title">Πρόσθετες Υπηρεσίες</div><div class="fsec-line"></div></div>
             <div class="extras-list">
               <label class="extra-item">
                 <input type="checkbox" class="extra-cb" name="extras" value="booster"/>
-                <span class="extra-label">Παιδικό κάθισμα (booster)</span>
+                <span class="extra-label" data-i18n="extra-booster">Παιδικό κάθισμα (booster)</span>
                 <span class="extra-cost">€25</span>
               </label>
               <label class="extra-item">
                 <input type="checkbox" class="extra-cb" name="extras" value="baby"/>
-                <span class="extra-label">Βρεφικό κάθισμα</span>
+                <span class="extra-label" data-i18n="extra-baby">Βρεφικό κάθισμα</span>
                 <span class="extra-cost">€25</span>
               </label>
               <label class="extra-item">
                 <input type="checkbox" class="extra-cb" name="extras" value="ferry"/>
-                <span class="extra-label">Εξουσιοδότηση Φέρι Μποτ</span>
+                <span class="extra-label" data-i18n="extra-ferry">Εξουσιοδότηση Φέρι Μποτ</span>
                 <span class="extra-cost">€60</span>
               </label>
               <label class="extra-item">
                 <input type="checkbox" class="extra-cb" name="extras" value="young"/>
-                <span class="extra-label">Νέος οδηγός (κάτω 21)</span>
+                <span class="extra-label" data-i18n="extra-young">Νέος οδηγός (κάτω 21)</span>
                 <span class="extra-cost">€60</span>
               </label>
               <label class="extra-item">
                 <input type="checkbox" class="extra-cb" name="extras" value="senior"/>
-                <span class="extra-label">Ηλικιωμένος οδηγός (άνω 75)</span>
+                <span class="extra-label" data-i18n="extra-senior">Ηλικιωμένος οδηγός (άνω 75)</span>
                 <span class="extra-cost">€60</span>
               </label>
               <label class="extra-item">
                 <input type="checkbox" class="extra-cb" name="extras" value="extra_drv"/>
-                <span class="extra-label">Πρόσθετος οδηγός (3ος+)</span>
+                <span class="extra-label" data-i18n="extra-drv">Πρόσθετος οδηγός (3ος+)</span>
                 <span class="extra-cost">€30</span>
               </label>
               <label class="extra-item">
                 <input type="checkbox" class="extra-cb" name="extras" value="oor"/>
-                <span class="extra-label">Εκτός ωραρίου γραφείου</span>
+                <span class="extra-label" data-i18n="extra-oor">Εκτός ωραρίου γραφείου</span>
                 <span class="extra-cost">€30</span>
               </label>
             </div>
             <div class="extras-note">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              2ος οδηγός: ΔΩΡΕΑΝ — μόνο ο 3ος και μετά χρεώνεται.
+              <span data-i18n="extras-note">2ος οδηγός: ΔΩΡΕΑΝ — μόνο ο 3ος και μετά χρεώνεται.</span>
             </div>
           </div>
 
@@ -469,32 +468,32 @@
 
           <!-- Section 4: Contact Details -->
           <div class="fsec">
-            <div class="fsec-head"><div class="fsec-num">4</div><div class="fsec-title">Στοιχεία Επικοινωνίας</div><div class="fsec-line"></div></div>
+            <div class="fsec-head"><div class="fsec-num">4</div><div class="fsec-title" data-i18n="sec4-title">Στοιχεία Επικοινωνίας</div><div class="fsec-line"></div></div>
             <div class="form-row">
               <div class="fgl">
-                <label>Όνομα *</label>
+                <label data-i18n="lbl-firstname">Όνομα *</label>
                 <input type="text" name="first_name" placeholder="π.χ. Γιώργης" required/>
                 <div class="field-err" id="err-first_name"></div>
               </div>
               <div class="fgl">
-                <label>Επώνυμο *</label>
+                <label data-i18n="lbl-lastname">Επώνυμο *</label>
                 <input type="text" name="last_name" placeholder="π.χ. Παπαδόπουλος" required/>
                 <div class="field-err" id="err-last_name"></div>
               </div>
             </div>
             <div class="form-row">
               <div class="fgl">
-                <label>Τηλέφωνο *</label>
+                <label data-i18n="lbl-phone">Τηλέφωνο *</label>
                 <input type="tel" name="phone" placeholder="69XXXXXXXX" required/>
                 <div class="field-err" id="err-phone"></div>
               </div>
               <div class="fgl">
-                <label>Email</label>
+                <label data-i18n="lbl-email">Email</label>
                 <input type="email" name="email" placeholder="email@example.com"/>
               </div>
             </div>
             <div class="fgl">
-              <label>Σχόλια / Πρόσθετες Πληροφορίες</label>
+              <label data-i18n="lbl-notes">Σχόλια / Πρόσθετες Πληροφορίες</label>
               <textarea name="notes" placeholder="π.χ. ώρα παραλαβής, αριθμός πτήσης, ειδικές απαιτήσεις..."></textarea>
             </div>
           </div>
@@ -502,7 +501,7 @@
           <div class="form-send-error" id="form-send-error" style="display:none"></div>
 
           <button type="submit" class="c-submit" id="booking-submit">
-            Αποστολή Αίτησης Κράτησης
+            <span data-i18n="submit-btn">Αποστολή Αίτησης Κράτησης</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
           <p style="font-size:.75rem;color:var(--gray-400);text-align:center;margin-top:14px;line-height:1.5">Θα σας επικοινωνήσουμε εντός 1 ώρας (08:00–22:00).<br/>Για άμεση εξυπηρέτηση καλέστε <a href="tel:+306983056936" style="color:var(--red)">+30 698 305 6936</a></p>

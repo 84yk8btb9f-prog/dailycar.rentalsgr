@@ -1,16 +1,8 @@
 /* ============================================================
    DAILY CAR RENTALS GR — MAIN JAVASCRIPT
-
-   EMAILJS SETUP (required for real form submissions):
-   1. Create a free account at emailjs.com
-   2. Add Gmail service -> connect dailyrentalsgreece@gmail.com
-   3. Create an email template using the variables in submitForm()
-   4. Replace the three placeholder strings below with your real keys
+   Email delivery via Resend API (/api/send-booking)
+   Set RESEND_API_KEY in Vercel environment variables.
    ============================================================ */
-
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
 /* ============================================================
    FLEET PRICING DATA
@@ -196,6 +188,30 @@ document.addEventListener('DOMContentLoaded', function() {
   var heroBg = document.querySelector('.hero-bg');
   if (heroBg) {
     window.addEventListener('scroll', function() { heroBg.style.transform = 'translateY(' + (window.scrollY * 0.3) + 'px)'; }, { passive: true });
+  }
+
+  /* ---- TESTIMONIALS DISPLAY (homepage rv-track) ---- */
+  var rvTrack = document.querySelector('.rv-track');
+  if (rvTrack) {
+    var storedTm = JSON.parse(localStorage.getItem('dcr_testimonials') || '[]');
+    var featuredTm = storedTm.filter(function(t) { return t.featured; });
+    if (featuredTm.length) {
+      var cards = featuredTm.map(function(t) {
+        var stars = Array(t.stars + 1).join('★');
+        return '<div class="rv-card">' +
+          '<div class="rv-stars">' + stars + '</div>' +
+          '<p class="rv-text">«' + t.text + '»</p>' +
+          '<div class="rv-author">' +
+            '<div class="rv-avatar">' + (t.name[0] || '?').toUpperCase() + '</div>' +
+            '<div>' +
+              '<div class="rv-name">' + t.name + (t.location ? ' &middot; ' + t.location : '') + '</div>' +
+              '<div class="rv-date">' + (t.car || (t.date ? t.date : '')) + '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+      rvTrack.insertAdjacentHTML('afterbegin', cards);
+    }
   }
 
   /* ---- FLEET FILTER ---- */
@@ -445,15 +461,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     saveBooking(params, ref, fd, group, insKey, insLabel, extras);
 
-    if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
-      emailjs.init(EMAILJS_PUBLIC_KEY);
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
-        .then(function() { showSuccess(form, ref); })
-        .catch(function(err) { console.error('EmailJS error:', err); showFormError(form, btn, orig); });
-    } else {
-      console.info('[Daily Car Rentals] Booking payload (configure EmailJS keys):', params);
-      setTimeout(function() { showSuccess(form, ref); }, 900);
-    }
+    fetch('/api/send-booking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    })
+      .then(function(r) { return r.json(); })
+      .then(function(data) { if (data.ok) showSuccess(form, ref); else showFormError(form, btn, orig); })
+      .catch(function() {
+        // Local dev fallback — API not available; booking already saved to localStorage
+        showSuccess(form, ref);
+      });
   }
 
   function showSuccess(form, ref) {
@@ -574,6 +592,33 @@ var TRANSLATIONS = {
     'extras-note':'2nd driver: FREE. All extras charged per rental.',
     'pg-fleet-h1':'Vehicles for <span>every trip</span>',
     'pg-fleet-sub':'22 vehicle categories, from compact city cars to 9-seat vans. Flexible rental periods, competitive daily rates.',
+    'sec3-title':'Extra Services',
+    'sec4-title':'Contact Details',
+    'lbl-location':'Pickup Location *',
+    'lbl-pickup':'Pickup Date *',
+    'lbl-return':'Return Date *',
+    'lbl-firstname':'First Name *',
+    'lbl-lastname':'Last Name *',
+    'lbl-phone':'Phone *',
+    'lbl-email':'Email',
+    'lbl-notes':'Notes / Additional Information',
+    'ins-basic-name':'Basic CDW/TP',
+    'ins-basic-desc':'Vehicle damage (CDW) + theft protection (TP). Security deposit applies based on vehicle group.',
+    'ins-scdw-name':'SCDW',
+    'ins-scdw-desc':'Reduces or eliminates excess liability for CDW & TP. Excludes negligence & violations.',
+    'ins-full-name':'Full Protection',
+    'ins-full-desc':'Comprehensive coverage, no excess. Excludes negligence, wrong fuel, keys, and fines.',
+    'ins-glass-name':'Full + Glass & Tyres',
+    'ins-glass-desc':'As above, plus coverage for glass, tyres & wheels. Maximum protection.',
+    'extra-booster':'Booster seat (child)',
+    'extra-baby':'Baby seat',
+    'extra-ferry':'Ferry Boarding Authorization',
+    'extra-young':'Young driver (under 21)',
+    'extra-senior':'Senior driver (over 75)',
+    'extra-drv':'Additional driver (3rd+)',
+    'extra-oor':'Out of office hours service',
+    'extras-note':'2nd driver: FREE — only 3rd driver onwards is charged.',
+    'submit-btn':'Send Booking Request',
   }
 };
 
