@@ -333,6 +333,42 @@ footer { background: var(--black); padding: 80px 0 0; border-top: 1px solid rgba
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ---- WHATSAPP FAB ---- */
+/* --- Floating language pill --- */
+.lang-pill {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(15,15,15,.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255,255,255,.18);
+  border-radius: 40px;
+  padding: 8px 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.35);
+}
+.lang-pill svg { color: rgba(255,255,255,.55); flex-shrink: 0; margin-right: 4px; }
+.lang-pill .lang-btn {
+  font-family: var(--font-display);
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .8px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,.5);
+  transition: color .2s, background .2s;
+}
+.lang-pill .lang-btn.active { background: var(--red); color: #fff; }
+.lang-pill .lang-btn:hover:not(.active) { color: #fff; }
+.lang-sep { color: rgba(255,255,255,.2); font-size: .7rem; }
+@media(max-width:640px) { .lang-pill { bottom: 20px; left: 16px; } }
+
 .wa-fab {
   position: fixed;
   bottom: 28px;
