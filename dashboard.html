@@ -334,6 +334,8 @@
         <div class="section-title">Αποκλεισμένες Περίοδοι</div>
       </div>
       <div class="blocked-list" id="blocked-list"></div>
+    </div><!-- /tab-blocked -->
+
     <!-- TAB: TESTIMONIALS -->
     <div class="tab-panel" id="tab-testimonials">
       <div class="block-form">
@@ -403,6 +405,8 @@ const CAR_NAMES = {
   S:'Peugeot 308 SW',F:'Fiat Doblo 7θ',J1:'Skoda Kamiq',J2:'Peugeot 2008',
   JA:'Nissan Qashqai Auto',XM:'Kia Sportage',KD:'Fiat Talento 9θ',KA:'Opel Vivaro Auto'
 };
+
+let activeFilter = 'all';
 
 /* ---- PIN LOGIC ---- */
 let pinEntry = '';
@@ -511,8 +515,6 @@ function renderStats() {
 }
 
 /* ---- BOOKINGS TABLE ---- */
-let activeFilter = 'all';
-
 function renderBookings() {
   const all = getBookings();
   const list = activeFilter === 'all' ? all : all.filter(b => b.status === activeFilter);

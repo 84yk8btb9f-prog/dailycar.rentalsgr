@@ -551,21 +551,7 @@ document.addEventListener('DOMContentLoaded', function() {
       '</div>';
   }
 
-  /* ---- BOOKING STEP INDICATOR ---- */
-  function updateSteps() {
-    var steps = document.querySelectorAll('.bk-step');
-    if (!steps.length || !cForm) return;
-    var s1done = !!(groupSel && groupSel.value && pickupInp && pickupInp.value && returnInp && returnInp.value);
-    var s2done = !!(s1done && cForm.querySelector('[name="insurance"]:checked'));
-    if (steps[0]) { steps[0].classList.toggle('done', s1done); steps[0].classList.toggle('active', !s1done); }
-    if (steps[1]) { steps[1].classList.toggle('done', s2done); steps[1].classList.toggle('active', s1done && !s2done); }
-    if (steps[2]) { steps[2].classList.toggle('active', s2done); }
-  }
-
-  if (groupSel) { groupSel.addEventListener('change', function() { refreshInsurancePrices(); updatePricing(); updateCarInfoCard(); updateSteps(); }); updateCarInfoCard(); }
-  if (pickupInp) pickupInp.addEventListener('change', updateSteps);
-  if (returnInp) returnInp.addEventListener('change', updateSteps);
-  updateSteps();
+  if (groupSel) { groupSel.addEventListener('change', function() { refreshInsurancePrices(); updatePricing(); updateCarInfoCard(); }); updateCarInfoCard(); }
 
 });
 
