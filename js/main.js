@@ -443,6 +443,8 @@ document.addEventListener('DOMContentLoaded', function() {
       to_email:        'dailyrentalsgreece@gmail.com',
     };
 
+    saveBooking(params, ref, fd, group, insKey, insLabel, extras);
+
     if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
       emailjs.init(EMAILJS_PUBLIC_KEY);
       emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
@@ -477,4 +479,133 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() { if (errDiv) errDiv.remove(); }, 6000);
   }
 
+  /* ---- SAVE BOOKING TO LOCALSTORAGE (for dashboard) ---- */
+  function saveBooking(params, ref, fd, group, insKey, insLabel, extras) {
+    var booking = {
+      id: ref,
+      timestamp: new Date().toISOString(),
+      name: (fd.get('first_name') || '') + ' ' + (fd.get('last_name') || ''),
+      phone: fd.get('phone') || '',
+      email: fd.get('email') || '',
+      pickup_location: fd.get('pickup_location') || '',
+      pickup_date: fd.get('pickup_date') || '',
+      return_date: fd.get('return_date') || '',
+      car_group: group,
+      car_label: params.car_group,
+      insurance: insKey,
+      insurance_label: insLabel,
+      extras: extras.join(', '),
+      notes: fd.get('notes') || '',
+      estimated_total: params.estimated_total,
+      status: 'pending'
+    };
+    var bookings = JSON.parse(localStorage.getItem('dcr_bookings') || '[]');
+    bookings.unshift(booking);
+    localStorage.setItem('dcr_bookings', JSON.stringify(bookings));
+  }
+
+  /* ---- CAR INFO CARD ---- */
+  function updateCarInfoCard() {
+    var card = document.getElementById('car-info-card');
+    if (!card || !groupSel) return;
+    var group = groupSel.value;
+    var info  = FLEET_DATA[group];
+    if (!group || !info) { card.classList.remove('visible'); return; }
+    var tierLabels = ['1-2 ημ.','3-6 ημ.','7-13 ημ.','14-29 ημ.','30+ ημ.'];
+    var transLabel = info.trans === 'Aftomato' ? 'Αυτόματο' : (info.trans === 'Mikto' ? 'Μικτό' : 'Χειροκίνητο');
+    var fuelLabel  = info.fuel === 'Diesel' ? 'Diesel' : (info.fuel === 'Mikto' ? 'Υβριδικό' : 'Βενζίνη');
+    card.classList.add('visible');
+    card.innerHTML =
+      '<div class="cic-badge">' + group + '</div>' +
+      '<div class="cic-body">' +
+        '<div class="cic-name">' + (FLEET_LABELS[group] || '') + '</div>' +
+        '<div class="cic-specs">' +
+          '<span class="cic-spec">' + info.catLabel + '</span>' +
+          '<span class="cic-spec">' + transLabel + '</span>' +
+          '<span class="cic-spec">' + fuelLabel + '</span>' +
+          '<span class="cic-spec">' + info.doors + ' πόρτες</span>' +
+          '<span class="cic-spec">' + info.seats + ' θέσεις</span>' +
+        '</div>' +
+        '<div class="cic-rates">' +
+          info.rates.map(function(r,i){ return '<span class="cic-rate">' + tierLabels[i] + ': <strong>' + r + '€/ημ.</strong></span>'; }).join('') +
+        '</div>' +
+        '<div class="cic-deposit">Εγγύηση: ' + info.deposit + '€ (επιστρέφεται)</div>' +
+      '</div>';
+  }
+
+  /* ---- BOOKING STEP INDICATOR ---- */
+  function updateSteps() {
+    var steps = document.querySelectorAll('.bk-step');
+    if (!steps.length || !cForm) return;
+    var s1done = !!(groupSel && groupSel.value && pickupInp && pickupInp.value && returnInp && returnInp.value);
+    var s2done = !!(s1done && cForm.querySelector('[name="insurance"]:checked'));
+    if (steps[0]) { steps[0].classList.toggle('done', s1done); steps[0].classList.toggle('active', !s1done); }
+    if (steps[1]) { steps[1].classList.toggle('done', s2done); steps[1].classList.toggle('active', s1done && !s2done); }
+    if (steps[2]) { steps[2].classList.toggle('active', s2done); }
+  }
+
+  if (groupSel) { groupSel.addEventListener('change', function() { refreshInsurancePrices(); updatePricing(); updateCarInfoCard(); updateSteps(); }); updateCarInfoCard(); }
+  if (pickupInp) pickupInp.addEventListener('change', updateSteps);
+  if (returnInp) returnInp.addEventListener('change', updateSteps);
+  updateSteps();
+
+});
+
+/* ================================================================
+   LANGUAGE SWITCHING (EL / EN)
+   ================================================================ */
+var TRANSLATIONS = {
+  en: {
+    'nav-home':'Home', 'nav-fleet':'Fleet', 'nav-about':'About Us', 'nav-book':'Book Now →',
+    'mob-home':'Home', 'mob-fleet':'Our Fleet', 'mob-about':'About Us', 'mob-book':'Book Now →',
+    'hero-tag':'Car Rental in Athens & Attica',
+    'hero-sub':'Delivery at your location. No credit card required, no hidden fees. 22 vehicle categories, 7 days a week 08:00–22:00.',
+    'book-btn':'Search Availability →',
+    'fleet-tag':'Our Fleet', 'fleet-all':'View all →',
+    'pg-fleet-tag':'Our Fleet', 'pg-about-tag':'About Us', 'pg-contact-tag':'Immediate Service',
+    'form-title':'Booking Form',
+    'form-sub':'Fill in the details and we\'ll contact you within 1 hour.',
+    'step1-title':'Vehicle & Dates', 'step2-title':'Insurance & Extras', 'step3-title':'Contact Details',
+    'lbl-location':'Pickup Location *', 'lbl-pickup':'Pickup Date *', 'lbl-return':'Return Date *',
+    'lbl-group':'Vehicle Category', 'lbl-ins':'Insurance Package', 'lbl-extras':'Extra Services',
+    'lbl-firstname':'First Name *', 'lbl-lastname':'Last Name *',
+    'lbl-phone':'Phone *', 'lbl-email':'Email *', 'lbl-notes':'Notes',
+    'submit-btn':'Send Booking Request →',
+    'extras-note':'2nd driver: FREE. All extras charged per rental.',
+    'pg-fleet-h1':'Vehicles for <span>every trip</span>',
+    'pg-fleet-sub':'22 vehicle categories, from compact city cars to 9-seat vans. Flexible rental periods, competitive daily rates.',
+  }
+};
+
+function setLang(lang) {
+  localStorage.setItem('dcr_lang', lang);
+  document.documentElement.lang = lang === 'en' ? 'en' : 'el';
+  document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.lang === lang); });
+  var t = lang === 'en' ? TRANSLATIONS.en : null;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.dataset.i18n;
+    if (t && t[key] !== undefined) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = t[key];
+      else el.innerHTML = t[key];
+    } else {
+      var orig = el.dataset.orig;
+      if (orig !== undefined) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = orig;
+        else el.innerHTML = orig;
+      }
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    if (el.dataset.orig === undefined) {
+      el.dataset.orig = (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') ? el.placeholder : el.innerHTML.trim();
+    }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { setLang(btn.dataset.lang); });
+  });
+  var saved = localStorage.getItem('dcr_lang');
+  if (saved) setLang(saved);
 });

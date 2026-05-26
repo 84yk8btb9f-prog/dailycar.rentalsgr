@@ -114,10 +114,14 @@
   <div class="nav-in">
     <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Daily Car Rentals GR" class="nav-logo-img"/></a>
     <div class="nav-links">
-      <a href="index.html">Αρχική</a>
-      <a href="fleet.html">Στόλος</a>
-      <a href="about.html">Σχετικά</a>
-      <a href="contact.html" class="nav-cta on" style="background:var(--red-dark)!important">Κράτηση →</a>
+      <a href="index.html" data-i18n="nav-home">Αρχική</a>
+      <a href="fleet.html" data-i18n="nav-fleet">Στόλος</a>
+      <a href="about.html" data-i18n="nav-about">Σχετικά</a>
+      <a href="contact.html" class="nav-cta on" style="background:var(--red-dark)!important" data-i18n="nav-book">Κράτηση →</a>
+    </div>
+    <div class="lang-toggle" style="margin-left:8px">
+      <button class="lang-btn active" data-lang="el">ΕΛ</button>
+      <button class="lang-btn" data-lang="en">EN</button>
     </div>
     <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -241,15 +245,33 @@
       <div class="c-form-wrap rv d2">
         <h3>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          Φόρμα Κράτησης
+          <span data-i18n="form-title">Φόρμα Κράτησης</span>
         </h3>
-        <p class="c-form-subtitle">Συμπληρώστε τα στοιχεία και θα επικοινωνήσουμε μαζί σας εντός 1 ώρας.</p>
+        <p class="c-form-subtitle" data-i18n="form-sub">Συμπληρώστε τα στοιχεία και θα επικοινωνήσουμε μαζί σας εντός 1 ώρας.</p>
+
+        <!-- STEP INDICATOR -->
+        <div class="bk-steps">
+          <div class="bk-step active">
+            <div class="bk-step-num">1</div>
+            <div class="bk-step-label" data-i18n="step1-title">Αυτοκίνητο & Ημερομηνίες</div>
+          </div>
+          <div class="bk-step-line"></div>
+          <div class="bk-step">
+            <div class="bk-step-num">2</div>
+            <div class="bk-step-label" data-i18n="step2-title">Ασφάλιση & Extras</div>
+          </div>
+          <div class="bk-step-line"></div>
+          <div class="bk-step">
+            <div class="bk-step-num">3</div>
+            <div class="bk-step-label" data-i18n="step3-title">Στοιχεία Επικοινωνίας</div>
+          </div>
+        </div>
 
         <form class="c-form" id="booking-form" novalidate>
 
           <!-- Section 1: Vehicle & Dates -->
           <div class="form-section">
-            <div class="form-section-title"><span>1</span> Αυτοκίνητο & Ημερομηνίες</div>
+            <div class="form-section-title"><span>1</span> <span data-i18n="step1-title">Αυτοκίνητο & Ημερομηνίες</span></div>
 
             <div class="fgl">
               <label>Τόπος Παραλαβής *</label>
@@ -277,39 +299,51 @@
             </div>
 
             <div class="fgl">
-              <label>Κατηγορία Αυτοκινήτου</label>
+              <label data-i18n="lbl-group">Κατηγορία Αυτοκινήτου</label>
               <select name="car_group" id="car-group-select">
                 <option value="">Δεν έχω προτίμηση</option>
-                <option value="A">A — Toyota Aygo ή παρόμοιο (Mini)</option>
-                <option value="B">B — Hyundai i10 ή παρόμοιο (Mini)</option>
-                <option value="BD">BD — Hyundai i10 Αυτόματο ή παρόμοιο (Mini Automatic)</option>
-                <option value="C1">C1 — Toyota Yaris ή παρόμοιο (Economy)</option>
-                <option value="CD">CD — Toyota Yaris Αυτόματο ή παρόμοιο (Economy Auto)</option>
-                <option value="GA">GA — VW Polo ή παρόμοιο (Economy+)</option>
-                <option value="D">D — Toyota Corolla ή παρόμοιο (Compact)</option>
-                <option value="DD">DD — Toyota Corolla Αυτόματο ή παρόμοιο (Compact Auto)</option>
-                <option value="G">G — Nissan Qashqai ή παρόμοιο (Compact+)</option>
-                <option value="E">E — Toyota Camry ή παρόμοιο (Sedan)</option>
-                <option value="ED">ED — Toyota Camry Αυτόματο ή παρόμοιο (Sedan Auto)</option>
-                <option value="E1">E1 — Mercedes C-Class ή παρόμοιο (Executive Sedan)</option>
-                <option value="G1">G1 — Toyota RAV4 ή παρόμοιο (SUV)</option>
-                <option value="G2">G2 — Toyota RAV4 Αυτόματο ή παρόμοιο (SUV Auto)</option>
-                <option value="S">S — Mercedes E-Class ή παρόμοιο (Executive)</option>
-                <option value="J1">J1 — Toyota Land Cruiser ή παρόμοιο (Large SUV)</option>
-                <option value="J2">J2 — Toyota Land Cruiser Auto ή παρόμοιο (Large SUV Auto)</option>
-                <option value="JA">JA — Hyundai Tucson ή παρόμοιο (Crossover)</option>
-                <option value="XM">XM — Kia Sportage ή παρόμοιο (Crossover+)</option>
-                <option value="F">F — Toyota Proace ή παρόμοιο (Van 9 θέσεων)</option>
-                <option value="KD">KD — Ford Transit ή παρόμοιο (Cargo Van)</option>
-                <option value="KA">KA — Renault Trafic ή παρόμοιο (Minivan)</option>
+                <optgroup label="Mini">
+                  <option value="A">A — Toyota Aygo ή παρόμοιο (Χειρ. / Βενζίνη)</option>
+                  <option value="B">B — Fiat Panda ή παρόμοιο (Χειρ. / Βενζίνη)</option>
+                  <option value="BD">BD — Fiat Panda Diesel ή παρόμοιο (Χειρ. / Diesel)</option>
+                  <option value="GA">GA — Hyundai i10 Auto ή παρόμοιο (Αυτ. / Βενζίνη)</option>
+                </optgroup>
+                <optgroup label="Compact / Economy">
+                  <option value="C1">C1 — Peugeot 208 ή παρόμοιο (Χειρ. / Βενζίνη)</option>
+                  <option value="CD">CD — Peugeot 208 Diesel ή παρόμοιο (Χειρ. / Diesel)</option>
+                  <option value="D">D — Seat Ibiza ή παρόμοιο (Χειρ. / Βενζίνη)</option>
+                  <option value="DD">DD — Seat Ibiza Diesel ή παρόμοιο (Χειρ. / Diesel)</option>
+                  <option value="G">G — Seat Ibiza Auto ή παρόμοιο (Αυτ. / Βενζίνη)</option>
+                </optgroup>
+                <optgroup label="Compact+ / Sedan">
+                  <option value="E">E — Hyundai i30 ή παρόμοιο (Χειρ. / Βενζίνη)</option>
+                  <option value="ED">ED — Hyundai i30 Diesel ή παρόμοιο (Χειρ. / Diesel)</option>
+                  <option value="E1">E1 — Fiat Tipo Sedan ή παρόμοιο (Χειρ. / Βενζίνη)</option>
+                  <option value="G2">G2 — Fiat Tipo Sedan Auto ή παρόμοιο (Αυτ. / Βενζίνη)</option>
+                  <option value="S">S — Peugeot 308 Station ή παρόμοιο (Χειρ. / Υβρ.)</option>
+                </optgroup>
+                <optgroup label="SUV / Crossover">
+                  <option value="J1">J1 — Skoda Kamiq ή παρόμοιο (Χειρ. / Βενζίνη)</option>
+                  <option value="J2">J2 — Peugeot 2008 ή παρόμοιο (Χειρ. / Βενζίνη)</option>
+                  <option value="JA">JA — Nissan Qashqai Auto ή παρόμοιο (Αυτ. / Βενζίνη)</option>
+                  <option value="G1">G1 — Kia Stonic Auto ή παρόμοιο (Αυτ. / Βενζίνη)</option>
+                  <option value="XM">XM — Kia Sportage ή παρόμοιο (Υβρ. / Μικτό)</option>
+                </optgroup>
+                <optgroup label="Van / Minivan">
+                  <option value="F">F — Fiat Doblo 7θ. ή παρόμοιο (Χειρ. / Υβρ.)</option>
+                  <option value="KD">KD — Fiat Talento 9θ. ή παρόμοιο (Χειρ. / Diesel)</option>
+                  <option value="KA">KA — Opel Vivaro Auto 9θ. ή παρόμοιο (Αυτ. / Diesel)</option>
+                </optgroup>
               </select>
+              <!-- live car info card -->
+              <div id="car-info-card"></div>
             </div>
 
           </div>
 
           <!-- Section 2: Insurance -->
           <div class="form-section">
-            <div class="form-section-title"><span>2</span> Ασφαλιστικό Πακέτο</div>
+            <div class="form-section-title"><span>2</span> <span data-i18n="step2-title">Ασφάλιση & Extras</span></div>
             <div class="ins-grid">
 
               <label class="ins-card selected" data-ins="basic">

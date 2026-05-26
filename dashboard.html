@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — Daily Car Rentals GR</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    /* ---- RESET & BASE ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #e81c2e; --red-d: #c0151e;
+      --black: #0a0a0a; --white: #fff;
+      --g50: #f9fafb; --g100: #f3f4f6; --g200: #e5e7eb;
+      --g400: #9ca3af; --g600: #4b5563; --g800: #1f2937;
+      --green: #16a34a; --orange: #d97706; --blue: #2563eb;
+      --font: 'Outfit', system-ui, sans-serif;
+      --radius: 12px; --shadow: 0 2px 16px rgba(0,0,0,.08);
+    }
+    body { font-family: var(--font); background: var(--g50); color: var(--black); min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font); cursor: pointer; border: none; }
+
+    /* ---- PIN SCREEN ---- */
+    #pin-screen {
+      position: fixed; inset: 0; background: var(--black);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 9999; gap: 32px;
+    }
+    #pin-screen.hidden { display: none; }
+    .pin-logo { font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,.4); letter-spacing: 3px; text-transform: uppercase; }
+    .pin-logo span { color: var(--red); }
+    .pin-title { font-size: 1.6rem; font-weight: 800; color: #fff; text-align: center; }
+    .pin-sub { font-size: .85rem; color: rgba(255,255,255,.4); text-align: center; margin-top: -20px; }
+    .pin-dots { display: flex; gap: 14px; }
+    .pin-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.25);
+      transition: background .15s, border-color .15s;
+    }
+    .pin-dot.filled { background: var(--red); border-color: var(--red); }
+    .pin-dot.error  { background: #ef4444; border-color: #ef4444; animation: shake .3s; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    .pin-pad { display: grid; grid-template-columns: repeat(3, 72px); gap: 12px; }
+    .pin-key {
+      height: 64px; border-radius: 14px; font-size: 1.4rem; font-weight: 700;
+      color: #fff; background: rgba(255,255,255,.07); border: 1.5px solid rgba(255,255,255,.1);
+      transition: background .15s, transform .1s;
+    }
+    .pin-key:hover { background: rgba(255,255,255,.14); }
+    .pin-key:active { transform: scale(.94); }
+    .pin-key.del { font-size: 1rem; color: rgba(255,255,255,.5); }
+    .pin-key.zero { grid-column: 2; }
+    .pin-err { color: #ef4444; font-size: .82rem; height: 18px; text-align: center; }
+
+    /* ---- APP SHELL ---- */
+    #app { display: none; min-height: 100vh; }
+    #app.visible { display: block; }
+    .topbar {
+      background: var(--black); color: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 60px; position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-brand { font-size: .9rem; font-weight: 800; letter-spacing: .5px; }
+    .topbar-brand span { color: var(--red); }
+    .topbar-right { display: flex; align-items: center; gap: 16px; }
+    .topbar-badge { background: rgba(255,255,255,.08); border-radius: 6px; padding: 4px 10px; font-size: .72rem; font-weight: 600; color: rgba(255,255,255,.5); }
+    .btn-lock { background: rgba(255,255,255,.07); border: 1.5px solid rgba(255,255,255,.1); color: rgba(255,255,255,.6); border-radius: 8px; padding: 6px 14px; font-size: .78rem; font-weight: 600; transition: all .2s; }
+    .btn-lock:hover { background: rgba(255,255,255,.14); color: #fff; }
+
+    .main-wrap { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* ---- TABS ---- */
+    .tabs { display: flex; gap: 4px; background: var(--g100); border-radius: 10px; padding: 4px; margin-bottom: 28px; width: fit-content; }
+    .tab-btn { padding: 8px 20px; border-radius: 7px; font-size: .82rem; font-weight: 600; color: var(--g600); background: transparent; transition: all .2s; }
+    .tab-btn.active { background: #fff; color: var(--black); box-shadow: 0 1px 6px rgba(0,0,0,.1); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ---- STAT CARDS ---- */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap: 16px; margin-bottom: 28px; }
+    .stat-card { background: #fff; border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow); border: 1px solid var(--g200); }
+    .stat-label { font-size: .72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); margin-bottom: 8px; }
+    .stat-value { font-size: 2rem; font-weight: 900; color: var(--black); line-height: 1; }
+    .stat-value.red { color: var(--red); }
+    .stat-value.green { color: var(--green); }
+    .stat-value.orange { color: var(--orange); }
+    .stat-sub { font-size: .75rem; color: var(--g400); margin-top: 4px; }
+
+    /* ---- BOOKINGS TABLE ---- */
+    .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .section-title { font-size: 1.1rem; font-weight: 800; color: var(--black); }
+    .btn-export { display: inline-flex; align-items: center; gap: 7px; background: var(--black); color: #fff; border-radius: 8px; padding: 8px 16px; font-size: .78rem; font-weight: 700; transition: background .2s; }
+    .btn-export:hover { background: var(--g800); }
+    .btn-clear-all { background: transparent; border: 1.5px solid var(--g200); color: var(--g600); border-radius: 8px; padding: 7px 14px; font-size: .78rem; font-weight: 600; transition: all .2s; }
+    .btn-clear-all:hover { border-color: #ef4444; color: #ef4444; }
+
+    .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .filter-chip { padding: 5px 14px; border-radius: 100px; border: 1.5px solid var(--g200); font-size: .75rem; font-weight: 600; color: var(--g600); background: #fff; cursor: pointer; transition: all .2s; }
+    .filter-chip.active { background: var(--black); border-color: var(--black); color: #fff; }
+
+    .tbl-wrap { background: #fff; border-radius: var(--radius); border: 1px solid var(--g200); box-shadow: var(--shadow); overflow: hidden; }
+    .tbl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; border-collapse: collapse; min-width: 780px; }
+    thead tr { background: var(--g50); border-bottom: 1px solid var(--g200); }
+    th { font-size: .7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--g400); padding: 12px 16px; text-align: left; white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--g100); transition: background .15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--g50); }
+    td { padding: 14px 16px; font-size: .83rem; color: var(--g600); vertical-align: top; }
+    td.td-name { font-weight: 700; color: var(--black); }
+    td.td-ref { font-family: monospace; font-size: .78rem; color: var(--g400); }
+    td.td-car { font-weight: 600; color: var(--black); }
+    .date-range { display: flex; flex-direction: column; gap: 2px; }
+    .date-range .dr-from { font-weight: 600; color: var(--black); font-size: .82rem; }
+    .date-range .dr-to   { font-size: .75rem; color: var(--g400); }
+    .date-range .dr-days { font-size: .72rem; font-weight: 700; color: var(--blue); margin-top: 2px; }
+    .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 100px; font-size: .72rem; font-weight: 700; white-space: nowrap; }
+    .badge-pending  { background: rgba(217,119,6,.1);  color: var(--orange); }
+    .badge-confirmed{ background: rgba(22,163,74,.1);  color: var(--green); }
+    .badge-cancelled{ background: rgba(239,68,68,.1);  color: #ef4444; }
+    .action-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+    .btn-sm { padding: 4px 10px; border-radius: 6px; font-size: .72rem; font-weight: 700; border: 1.5px solid; transition: all .18s; }
+    .btn-confirm { border-color: var(--green); color: var(--green); background: transparent; }
+    .btn-confirm:hover { background: var(--green); color: #fff; }
+    .btn-cancel  { border-color: #ef4444; color: #ef4444; background: transparent; }
+    .btn-cancel:hover  { background: #ef4444; color: #fff; }
+    .btn-delete  { border-color: var(--g200); color: var(--g400); background: transparent; }
+    .btn-delete:hover  { border-color: var(--g400); color: var(--g600); }
+    .empty-state { text-align: center; padding: 64px 24px; color: var(--g400); }
+    .empty-state svg { opacity: .3; margin-bottom: 16px; }
+    .empty-state p { font-size: .9rem; }
+
+    /* ---- AVAILABILITY GRID ---- */
+    .avail-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+    .avail-legend-item { display: flex; align-items: center; gap: 6px; font-size: .75rem; color: var(--g600); font-weight: 600; }
+    .avail-dot { width: 12px; height: 12px; border-radius: 3px; }
+    .avail-dot.free     { background: #dcfce7; border: 1px solid #86efac; }
+    .avail-dot.booked   { background: #fee2e2; border: 1px solid #fca5a5; }
+    .avail-dot.blocked  { background: var(--g200); border: 1px solid var(--g400); }
+    .avail-dot.today    { background: #dbeafe; border: 1px solid #93c5fd; }
+
+    .avail-table-wrap { background: #fff; border-radius: var(--radius); border: 1px solid var(--g200); box-shadow: var(--shadow); overflow: hidden; }
+    .avail-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .avail-table { border-collapse: collapse; min-width: 600px; }
+    .avail-table th { font-size: .65rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--g400); padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--g200); }
+    .avail-table th.car-col { text-align: left; padding-left: 16px; min-width: 160px; }
+    .avail-table td { padding: 5px 4px; border-bottom: 1px solid var(--g100); }
+    .avail-table tr:last-child td { border-bottom: none; }
+    .avail-table .car-name-cell { padding: 8px 8px 8px 16px; font-size: .78rem; font-weight: 700; color: var(--black); white-space: nowrap; }
+    .avail-cell { width: 32px; height: 32px; border-radius: 6px; display: block; margin: 0 auto; cursor: default; position: relative; }
+    .avail-cell.free    { background: #dcfce7; }
+    .avail-cell.booked  { background: #fee2e2; }
+    .avail-cell.blocked { background: var(--g200); }
+    .avail-cell.today   { background: #dbeafe; outline: 2px solid #3b82f6; outline-offset: -2px; }
+    .avail-cell[title]:hover::after {
+      content: attr(title); position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%);
+      background: var(--black); color: #fff; font-size: .65rem; padding: 4px 8px; border-radius: 4px;
+      white-space: nowrap; z-index: 10; pointer-events: none;
+    }
+
+    /* ---- BLOCKED DATES ---- */
+    .block-form { background: #fff; border-radius: var(--radius); border: 1px solid var(--g200); box-shadow: var(--shadow); padding: 24px; margin-bottom: 24px; }
+    .block-form h3 { font-size: 1rem; font-weight: 800; margin-bottom: 20px; }
+    .block-fields { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; align-items: end; }
+    .bfl { display: flex; flex-direction: column; gap: 6px; }
+    .bfl label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--g400); }
+    .bfl select, .bfl input { font-family: var(--font); font-size: .85rem; padding: 10px 12px; border: 1.5px solid var(--g200); border-radius: 8px; background: var(--g50); color: var(--black); outline: none; transition: border-color .2s; }
+    .bfl select:focus, .bfl input:focus { border-color: var(--black); }
+    .btn-block-add { background: var(--red); color: #fff; border-radius: 8px; padding: 10px 20px; font-size: .85rem; font-weight: 700; transition: background .2s; align-self: flex-end; height: 42px; }
+    .btn-block-add:hover { background: var(--red-d); }
+
+    .blocked-list { background: #fff; border-radius: var(--radius); border: 1px solid var(--g200); box-shadow: var(--shadow); overflow: hidden; }
+    .blocked-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid var(--g100); gap: 12px; flex-wrap: wrap; }
+    .blocked-row:last-child { border-bottom: none; }
+    .blocked-info { font-size: .83rem; }
+    .blocked-car  { font-weight: 700; color: var(--black); }
+    .blocked-dates{ color: var(--g600); margin-top: 2px; font-size: .78rem; }
+    .blocked-note { font-size: .72rem; color: var(--g400); margin-top: 2px; font-style: italic; }
+    .btn-unblock  { border: 1.5px solid var(--g200); color: var(--g400); background: transparent; border-radius: 6px; padding: 4px 12px; font-size: .72rem; font-weight: 700; transition: all .2s; }
+    .btn-unblock:hover { border-color: #ef4444; color: #ef4444; }
+
+    @media (max-width: 640px) {
+      .topbar { padding: 0 16px; }
+      .main-wrap { padding: 20px 16px 60px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PIN LOCK SCREEN -->
+<!-- Default PIN: 1234 — change DASHBOARD_PIN constant in the script below -->
+<div id="pin-screen">
+  <div class="pin-logo">Daily<span>Car</span> · Rentals GR</div>
+  <div>
+    <div class="pin-title">Είσοδος Dashboard</div>
+    <div class="pin-sub" style="margin-top:8px">Εισάγετε τον κωδικό πρόσβασης</div>
+  </div>
+  <div class="pin-dots">
+    <div class="pin-dot" id="pd0"></div>
+    <div class="pin-dot" id="pd1"></div>
+    <div class="pin-dot" id="pd2"></div>
+    <div class="pin-dot" id="pd3"></div>
+  </div>
+  <div class="pin-pad">
+    <button class="pin-key" data-k="1">1</button>
+    <button class="pin-key" data-k="2">2</button>
+    <button class="pin-key" data-k="3">3</button>
+    <button class="pin-key" data-k="4">4</button>
+    <button class="pin-key" data-k="5">5</button>
+    <button class="pin-key" data-k="6">6</button>
+    <button class="pin-key" data-k="7">7</button>
+    <button class="pin-key" data-k="8">8</button>
+    <button class="pin-key" data-k="9">9</button>
+    <button class="pin-key zero" data-k="0">0</button>
+    <button class="pin-key del" data-k="del">⌫</button>
+  </div>
+  <div class="pin-err" id="pin-err"></div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-brand">Daily<span>Car</span> Dashboard</div>
+    <div class="topbar-right">
+      <span class="topbar-badge" id="topbar-count">0 κρατήσεις</span>
+      <a href="index.html" class="btn-lock">← Ιστοσελίδα</a>
+      <button class="btn-lock" id="btn-lock">Κλείδωμα</button>
+    </div>
+  </div>
+
+  <div class="main-wrap">
+
+    <!-- STATS ROW -->
+    <div class="stats-row" id="stats-row"></div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="bookings">Κρατήσεις</button>
+      <button class="tab-btn" data-tab="availability">Διαθεσιμότητα</button>
+      <button class="tab-btn" data-tab="blocked">Αποκλεισμός Ημερών</button>
+    </div>
+
+    <!-- TAB: BOOKINGS -->
+    <div class="tab-panel active" id="tab-bookings">
+      <div class="section-head">
+        <div class="section-title">Όλες οι Κρατήσεις</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn-export" id="btn-export">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Εξαγωγή CSV
+          </button>
+          <button class="btn-clear-all" id="btn-clear-all">Διαγραφή Όλων</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <button class="filter-chip active" data-filter="all">Όλες</button>
+        <button class="filter-chip" data-filter="pending">Σε αναμονή</button>
+        <button class="filter-chip" data-filter="confirmed">Επιβεβαιωμένες</button>
+        <button class="filter-chip" data-filter="cancelled">Ακυρωμένες</button>
+      </div>
+      <div class="tbl-wrap">
+        <div class="tbl-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Κωδ. Κράτησης</th>
+                <th>Πελάτης</th>
+                <th>Επικοινωνία</th>
+                <th>Αυτοκίνητο</th>
+                <th>Παραλαβή → Επιστροφή</th>
+                <th>Τοποθεσία</th>
+                <th>Ασφάλιση</th>
+                <th>Εκτίμ. Κόστος</th>
+                <th>Κατάσταση</th>
+                <th>Ενέργειες</th>
+              </tr>
+            </thead>
+            <tbody id="bookings-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: AVAILABILITY -->
+    <div class="tab-panel" id="tab-availability">
+      <div class="section-head">
+        <div class="section-title">Διαθεσιμότητα — Επόμενες 21 ημέρες</div>
+      </div>
+      <div class="avail-legend">
+        <div class="avail-legend-item"><div class="avail-dot free"></div> Διαθέσιμο</div>
+        <div class="avail-legend-item"><div class="avail-dot booked"></div> Κρατημένο</div>
+        <div class="avail-legend-item"><div class="avail-dot blocked"></div> Αποκλεισμένο</div>
+        <div class="avail-legend-item"><div class="avail-dot today"></div> Σήμερα</div>
+      </div>
+      <div class="avail-table-wrap">
+        <div class="avail-scroll">
+          <table class="avail-table" id="avail-table"></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: BLOCKED DATES -->
+    <div class="tab-panel" id="tab-blocked">
+      <div class="block-form">
+        <h3>Αποκλεισμός Ημερομηνιών</h3>
+        <div class="block-fields">
+          <div class="bfl">
+            <label>Κατηγορία</label>
+            <select id="bl-car">
+              <option value="ALL">Όλα τα αυτοκίνητα</option>
+            </select>
+          </div>
+          <div class="bfl">
+            <label>Από</label>
+            <input type="date" id="bl-from"/>
+          </div>
+          <div class="bfl">
+            <label>Έως</label>
+            <input type="date" id="bl-to"/>
+          </div>
+          <div class="bfl">
+            <label>Αιτία (προαιρετικά)</label>
+            <input type="text" id="bl-note" placeholder="π.χ. Συντήρηση, Κλεισμένο"/>
+          </div>
+          <button class="btn-block-add" id="btn-block-add">+ Αποκλεισμός</button>
+        </div>
+      </div>
+      <div class="section-head">
+        <div class="section-title">Αποκλεισμένες Περίοδοι</div>
+      </div>
+      <div class="blocked-list" id="blocked-list"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   DASHBOARD — Daily Car Rentals GR
+   PIN: change DASHBOARD_PIN below (default: 1234)
+   ================================================================ */
+const DASHBOARD_PIN = '1234';
+
+const CAR_GROUPS = ['A','B','BD','C1','CD','GA','D','DD','G','E','ED','E1','G1','G2','S','F','J1','J2','JA','XM','KD','KA'];
+const CAR_NAMES = {
+  A:'Toyota Aygo',B:'Fiat Panda',BD:'Fiat Panda Diesel',C1:'Peugeot 208',CD:'Peugeot 208 D',
+  GA:'Hyundai i10 Auto',D:'Seat Ibiza',DD:'Seat Ibiza D',G:'Seat Ibiza Auto',
+  E:'Hyundai i30',ED:'Hyundai i30 D',E1:'Fiat Tipo Sedan',G1:'Kia Stonic Auto',G2:'Fiat Tipo Auto',
+  S:'Peugeot 308 SW',F:'Fiat Doblo 7θ',J1:'Skoda Kamiq',J2:'Peugeot 2008',
+  JA:'Nissan Qashqai Auto',XM:'Kia Sportage',KD:'Fiat Talento 9θ',KA:'Opel Vivaro Auto'
+};
+
+/* ---- PIN LOGIC ---- */
+let pinEntry = '';
+
+function updatePinDots() {
+  for (let i = 0; i < 4; i++) {
+    const dot = document.getElementById('pd' + i);
+    dot.classList.toggle('filled', i < pinEntry.length);
+    dot.classList.remove('error');
+  }
+}
+
+function pinError() {
+  for (let i = 0; i < 4; i++) document.getElementById('pd' + i).classList.add('error');
+  document.getElementById('pin-err').textContent = 'Λάθος κωδικός';
+  setTimeout(() => {
+    pinEntry = '';
+    updatePinDots();
+    document.getElementById('pin-err').textContent = '';
+  }, 700);
+}
+
+function pinSuccess() {
+  sessionStorage.setItem('dcr_auth', '1');
+  document.getElementById('pin-screen').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  renderAll();
+}
+
+document.querySelectorAll('.pin-key').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const k = btn.dataset.k;
+    if (k === 'del') { pinEntry = pinEntry.slice(0, -1); updatePinDots(); return; }
+    if (pinEntry.length >= 4) return;
+    pinEntry += k;
+    updatePinDots();
+    if (pinEntry.length === 4) {
+      if (pinEntry === DASHBOARD_PIN) pinSuccess();
+      else pinError();
+    }
+  });
+});
+
+document.getElementById('btn-lock').addEventListener('click', () => {
+  sessionStorage.removeItem('dcr_auth');
+  pinEntry = '';
+  updatePinDots();
+  document.getElementById('pin-screen').classList.remove('hidden');
+  document.getElementById('app').classList.remove('visible');
+});
+
+// Auto-unlock if already authenticated this session
+if (sessionStorage.getItem('dcr_auth') === '1') pinSuccess();
+
+/* ---- DATA HELPERS ---- */
+function getBookings() { return JSON.parse(localStorage.getItem('dcr_bookings') || '[]'); }
+function saveBookings(b) { localStorage.setItem('dcr_bookings', JSON.stringify(b)); }
+function getBlocked() { return JSON.parse(localStorage.getItem('dcr_blocked') || '[]'); }
+function saveBlocked(b) { localStorage.setItem('dcr_blocked', JSON.stringify(b)); }
+
+function daysBetween(a, b) {
+  return Math.max(0, Math.round((new Date(b) - new Date(a)) / 86400000));
+}
+
+function fmtDate(d) {
+  if (!d) return '—';
+  const [y,m,day] = d.split('-');
+  return day + '/' + m + '/' + y;
+}
+
+function isDateInRange(date, from, to) {
+  return date >= from && date <= to;
+}
+
+/* ---- TABS ---- */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'availability') renderAvailability();
+    if (btn.dataset.tab === 'blocked') renderBlocked();
+  });
+});
+
+/* ---- STATS ---- */
+function renderStats() {
+  const bookings = getBookings();
+  const pending   = bookings.filter(b => b.status === 'pending').length;
+  const confirmed = bookings.filter(b => b.status === 'confirmed').length;
+  const cancelled = bookings.filter(b => b.status === 'cancelled').length;
+  const revenue   = bookings
+    .filter(b => b.status !== 'cancelled')
+    .reduce((s, b) => s + (parseInt(b.estimated_total) || 0), 0);
+
+  document.getElementById('topbar-count').textContent = bookings.length + ' κρατήσεις';
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Σύνολο</div><div class="stat-value">${bookings.length}</div><div class="stat-sub">κρατήσεις</div></div>
+    <div class="stat-card"><div class="stat-label">Σε αναμονή</div><div class="stat-value orange">${pending}</div><div class="stat-sub">χρειάζονται επιβεβαίωση</div></div>
+    <div class="stat-card"><div class="stat-label">Επιβεβαιωμένες</div><div class="stat-value green">${confirmed}</div><div class="stat-sub">κρατήσεις</div></div>
+    <div class="stat-card"><div class="stat-label">Ακυρωμένες</div><div class="stat-value red">${cancelled}</div><div class="stat-sub">κρατήσεις</div></div>
+    <div class="stat-card"><div class="stat-label">Εκτιμ. Έσοδα</div><div class="stat-value">€${revenue}</div><div class="stat-sub">μη ακυρωμένες</div></div>
+  `;
+}
+
+/* ---- BOOKINGS TABLE ---- */
+let activeFilter = 'all';
+
+function renderBookings() {
+  const all = getBookings();
+  const list = activeFilter === 'all' ? all : all.filter(b => b.status === activeFilter);
+  const tbody = document.getElementById('bookings-tbody');
+
+  if (!list.length) {
+    tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <p>${activeFilter === 'all' ? 'Δεν υπάρχουν κρατήσεις ακόμα.' : 'Καμία κράτηση σε αυτή την κατηγορία.'}</p>
+    </div></td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map((b, idx) => {
+    const days = daysBetween(b.pickup_date, b.return_date);
+    const badgeClass = { pending:'badge-pending', confirmed:'badge-confirmed', cancelled:'badge-cancelled' }[b.status] || 'badge-pending';
+    const badgeText  = { pending:'Αναμονή', confirmed:'Επιβεβαιωμένη', cancelled:'Ακυρωμένη' }[b.status] || b.status;
+    const globalIdx  = getBookings().findIndex(x => x.id === b.id);
+    return `<tr>
+      <td class="td-ref">${b.id}</td>
+      <td class="td-name">${b.name || '—'}</td>
+      <td><div>${b.phone || ''}</div><div style="font-size:.72rem;color:var(--g400)">${b.email || ''}</div></td>
+      <td class="td-car">${b.car_group || '—'}<br/><span style="font-weight:400;font-size:.72rem;color:var(--g400)">${CAR_NAMES[b.car_group] || ''}</span></td>
+      <td><div class="date-range">
+        <div class="dr-from">${fmtDate(b.pickup_date)}</div>
+        <div class="dr-to">→ ${fmtDate(b.return_date)}</div>
+        ${days ? '<div class="dr-days">' + days + ' ημ.</div>' : ''}
+      </div></td>
+      <td style="font-size:.75rem;max-width:140px">${b.pickup_location || '—'}</td>
+      <td style="font-size:.75rem">${b.insurance_label || b.insurance || '—'}</td>
+      <td style="font-weight:700">${b.estimated_total || '—'}</td>
+      <td><span class="badge ${badgeClass}">${badgeText}</span></td>
+      <td><div class="action-btns">
+        ${b.status !== 'confirmed' ? `<button class="btn-sm btn-confirm" onclick="changeStatus(${globalIdx},'confirmed')">Επιβ.</button>` : ''}
+        ${b.status !== 'cancelled' ? `<button class="btn-sm btn-cancel"  onclick="changeStatus(${globalIdx},'cancelled')">Ακύρ.</button>` : ''}
+        <button class="btn-sm btn-delete" onclick="deleteBooking(${globalIdx})">✕</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+function changeStatus(idx, status) {
+  const bookings = getBookings();
+  if (bookings[idx]) { bookings[idx].status = status; saveBookings(bookings); renderAll(); }
+}
+
+function deleteBooking(idx) {
+  if (!confirm('Διαγραφή κράτησης;')) return;
+  const bookings = getBookings();
+  bookings.splice(idx, 1);
+  saveBookings(bookings);
+  renderAll();
+}
+
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.filter;
+    renderBookings();
+  });
+});
+
+document.getElementById('btn-clear-all').addEventListener('click', () => {
+  if (!confirm('Διαγραφή ΟΛΩΝ των κρατήσεων; Αυτή η ενέργεια δεν αναιρείται.')) return;
+  saveBookings([]);
+  renderAll();
+});
+
+document.getElementById('btn-export').addEventListener('click', () => {
+  const bookings = getBookings();
+  if (!bookings.length) { alert('Δεν υπάρχουν κρατήσεις για εξαγωγή.'); return; }
+  const headers = ['Κωδ.','Ημ/νία Αίτησης','Πελάτης','Τηλ.','Email','Τοποθεσία','Παραλαβή','Επιστροφή','Αυτοκίνητο','Ασφάλιση','Extras','Κόστος','Κατάσταση','Σημειώσεις'];
+  const rows = bookings.map(b => [
+    b.id, (b.timestamp||'').slice(0,10), b.name, b.phone, b.email,
+    b.pickup_location, b.pickup_date, b.return_date,
+    (b.car_group||'') + ' ' + (CAR_NAMES[b.car_group]||''),
+    b.insurance_label||b.insurance, b.extras, b.estimated_total, b.status, b.notes
+  ].map(v => '"' + (v||'').toString().replace(/"/g,'""') + '"').join(','));
+  const csv = [headers.join(','), ...rows].join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,﻿' + encodeURIComponent(csv);
+  a.download = 'kratiseis-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+});
+
+/* ---- AVAILABILITY GRID ---- */
+function renderAvailability() {
+  const bookings = getBookings().filter(b => b.status !== 'cancelled');
+  const blocked  = getBlocked();
+  const today    = new Date(); today.setHours(0,0,0,0);
+  const days = 21;
+  const dates = Array.from({length: days}, (_, i) => {
+    const d = new Date(today); d.setDate(today.getDate() + i);
+    return d.toISOString().split('T')[0];
+  });
+
+  const todayStr = today.toISOString().split('T')[0];
+
+  const fmt = d => {
+    const [,m,day] = d.split('-');
+    return day + '/' + m;
+  };
+  const dow = d => ['Κυρ','Δευ','Τρι','Τετ','Πεμ','Παρ','Σαβ'][new Date(d).getDay()];
+
+  let html = '<thead><tr><th class="car-col">Αυτοκίνητο</th>';
+  dates.forEach(d => { html += `<th style="${d===todayStr?'color:#3b82f6;font-weight:900':''}">${dow(d)}<br/>${fmt(d)}</th>`; });
+  html += '</tr></thead><tbody>';
+
+  CAR_GROUPS.forEach(group => {
+    html += `<tr><td class="car-name-cell">${group}<br/><span style="font-weight:400;font-size:.7rem;color:var(--g400)">${CAR_NAMES[group]||''}</span></td>`;
+    dates.forEach(d => {
+      const isBooked  = bookings.some(b => b.car_group === group && b.pickup_date && b.return_date && isDateInRange(d, b.pickup_date, b.return_date));
+      const isBlocked = blocked.some(bl => (bl.car_group === group || bl.car_group === 'ALL') && isDateInRange(d, bl.from, bl.to));
+      const isToday   = d === todayStr;
+      const cls = isBlocked ? 'blocked' : isBooked ? 'booked' : isToday ? 'today' : 'free';
+      const title = isBlocked ? 'Αποκλεισμένο' : isBooked ? (() => { const bk = bookings.find(b => b.car_group === group && isDateInRange(d, b.pickup_date, b.return_date)); return bk ? bk.name + ' · ' + bk.id : 'Κρατημένο'; })() : 'Διαθέσιμο';
+      html += `<td><span class="avail-cell ${cls}" title="${title}"></span></td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('avail-table').innerHTML = html;
+}
+
+/* ---- BLOCKED DATES ---- */
+function populateBlockedCarSelect() {
+  const sel = document.getElementById('bl-car');
+  sel.innerHTML = '<option value="ALL">Όλα τα αυτοκίνητα</option>';
+  CAR_GROUPS.forEach(g => {
+    const opt = document.createElement('option');
+    opt.value = g; opt.textContent = g + ' — ' + (CAR_NAMES[g]||g);
+    sel.appendChild(opt);
+  });
+}
+
+function renderBlocked() {
+  const list = getBlocked();
+  const el = document.getElementById('blocked-list');
+  if (!list.length) {
+    el.innerHTML = '<div style="padding:32px;text-align:center;color:var(--g400);font-size:.85rem">Δεν υπάρχουν αποκλεισμένες περίοδοι.</div>';
+    return;
+  }
+  el.innerHTML = list.map((b, i) => `
+    <div class="blocked-row">
+      <div class="blocked-info">
+        <div class="blocked-car">${b.car_group === 'ALL' ? 'Όλα τα αυτοκίνητα' : b.car_group + ' — ' + (CAR_NAMES[b.car_group]||b.car_group)}</div>
+        <div class="blocked-dates">${fmtDate(b.from)} → ${fmtDate(b.to)}</div>
+        ${b.note ? '<div class="blocked-note">' + b.note + '</div>' : ''}
+      </div>
+      <button class="btn-unblock" onclick="removeBlock(${i})">Αφαίρεση</button>
+    </div>
+  `).join('');
+}
+
+function removeBlock(i) {
+  const list = getBlocked(); list.splice(i, 1); saveBlocked(list); renderBlocked();
+}
+
+document.getElementById('btn-block-add').addEventListener('click', () => {
+  const car  = document.getElementById('bl-car').value;
+  const from = document.getElementById('bl-from').value;
+  const to   = document.getElementById('bl-to').value;
+  const note = document.getElementById('bl-note').value.trim();
+  if (!from || !to) { alert('Επιλέξτε ημερομηνία έναρξης και λήξης.'); return; }
+  if (to < from) { alert('Η ημερομηνία λήξης πρέπει να είναι μετά την έναρξη.'); return; }
+  const list = getBlocked();
+  list.push({ car_group: car, from, to, note });
+  saveBlocked(list);
+  document.getElementById('bl-from').value = '';
+  document.getElementById('bl-to').value = '';
+  document.getElementById('bl-note').value = '';
+  renderBlocked();
+});
+
+/* ---- SEED DEMO DATA (remove after testing) ---- */
+function seedDemoIfEmpty() {
+  if (getBookings().length > 0) return;
+  const today = new Date();
+  const d = (offset, base = today) => {
+    const dd = new Date(base); dd.setDate(dd.getDate() + offset);
+    return dd.toISOString().split('T')[0];
+  };
+  saveBookings([
+    { id:'DCR-DEMO1', timestamp: new Date().toISOString(), name:'Νίκος Παπαδόπουλος', phone:'+30 6900 000001', email:'nikos@example.com', pickup_location:'Αεροδρόμιο Αθηνών', pickup_date:d(1), return_date:d(4), car_group:'E', car_label:'E — Hyundai i30', insurance:'scdw', insurance_label:'SCDW', extras:'Παιδικό κάθισμα (booster)', notes:'Άφιξη πτήση 14:30', estimated_total:'150', status:'pending' },
+    { id:'DCR-DEMO2', timestamp: new Date().toISOString(), name:'Maria Georgiou', phone:'+30 6900 000002', email:'maria@example.com', pickup_location:'Αθήνα / Κορωπί', pickup_date:d(2), return_date:d(6), car_group:'JA', car_label:'JA — Nissan Qashqai Auto', insurance:'basic', insurance_label:'Βασική CDW/TP', extras:'', notes:'', estimated_total:'276', status:'confirmed' },
+    { id:'DCR-DEMO3', timestamp: new Date().toISOString(), name:'Κώστας Σταματίου', phone:'+30 6900 000003', email:'kostas@example.com', pickup_location:'Πειραιάς', pickup_date:d(-3), return_date:d(-1), car_group:'A', car_label:'A — Toyota Aygo', insurance:'basic', insurance_label:'Βασική CDW/TP', extras:'', notes:'', estimated_total:'66', status:'confirmed' },
+  ]);
+}
+
+/* ---- RENDER ALL ---- */
+function renderAll() {
+  renderStats();
+  renderBookings();
+}
+
+populateBlockedCarSelect();
+seedDemoIfEmpty();
+</script>
+</body>
+</html>

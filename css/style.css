@@ -53,7 +53,7 @@ body:hover .cursor { opacity: 1; }
 .nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; color: #fff; letter-spacing: -.5px; flex-shrink: 0; display: flex; align-items: center; }
 .nav-logo span { color: var(--red); }
 .nav-logo small { display: block; font-size: .5rem; font-weight: 400; letter-spacing: 3px; color: rgba(255,255,255,.3); text-transform: uppercase; margin-top: -3px; }
-.nav-logo-img { height: 40px; width: auto; object-fit: contain; mix-blend-mode: screen; display: block; }
+.nav-logo-img { height: 52px; width: auto; object-fit: contain; mix-blend-mode: screen; display: block; }
 .loader-logo { height: 60px; width: auto; object-fit: contain; mix-blend-mode: screen; }
 .nav-links { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
 .nav-links a { font-family: var(--font-display); font-size: .8rem; font-weight: 500; color: rgba(255,255,255,.65); padding: 8px 12px; border-radius: 6px; transition: color .2s, background .2s; position: relative; white-space: nowrap; }
@@ -588,4 +588,41 @@ footer { background: var(--black); padding: 80px 0 0; border-top: 1px solid rgba
 
 /* ---- CONTACT FORM: HOURS NOTE ---- */
 .hours-note { font-size: .78rem; color: var(--gray-600); padding: 10px 14px; background: rgba(232,28,46,.05); border: 1px solid rgba(232,28,46,.15); border-radius: 8px; margin-top: 6px; line-height: 1.5; }
+
+/* ---- LANGUAGE TOGGLE ---- */
+.lang-toggle { display: inline-flex; align-items: center; gap: 0; border: 1.5px solid rgba(255,255,255,.22); border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+.lang-btn { font-family: var(--font-display); font-size: .72rem; font-weight: 700; letter-spacing: .5px; padding: 5px 10px; color: rgba(255,255,255,.5); background: transparent; border: none; cursor: pointer; transition: color .2s, background .2s; }
+.lang-btn.active { background: rgba(255,255,255,.15); color: #fff; }
+.lang-btn:hover:not(.active) { color: rgba(255,255,255,.8); }
+
+/* ---- BOOKING STEP INDICATOR ---- */
+.bk-steps { display: flex; align-items: center; margin-bottom: 36px; }
+.bk-step { display: flex; align-items: center; gap: 10px; flex: 1; }
+.bk-step:last-child { flex: 0; }
+.bk-step-num { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--gray-300); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: .72rem; font-weight: 800; color: var(--gray-400); flex-shrink: 0; transition: border-color .3s, background .3s, color .3s; }
+.bk-step.done .bk-step-num { border-color: #16a34a; background: #16a34a; color: #fff; }
+.bk-step.active .bk-step-num { border-color: var(--red); background: var(--red); color: #fff; }
+.bk-step-label { font-family: var(--font-display); font-size: .72rem; font-weight: 600; color: var(--gray-400); white-space: nowrap; transition: color .3s; }
+.bk-step.active .bk-step-label { color: var(--black); }
+.bk-step.done .bk-step-label { color: #16a34a; }
+.bk-step-line { flex: 1; height: 1.5px; background: var(--gray-200); margin: 0 10px; }
+.bk-step.done + .bk-step .bk-step-line, .bk-step-line.done { background: #16a34a; }
+@media (max-width: 540px) { .bk-step-label { display: none; } .bk-step-line { margin: 0 6px; } }
+
+/* ---- CAR INFO CARD (booking form) ---- */
+#car-info-card { background: #f8f9fa; border: 1px solid var(--gray-200); border-radius: 14px; padding: 18px 20px; margin-top: 12px; display: none; }
+#car-info-card.visible { display: flex; align-items: flex-start; gap: 16px; }
+.cic-badge { background: var(--red); color: #fff; font-family: var(--font-display); font-size: .75rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; flex-shrink: 0; letter-spacing: .5px; }
+.cic-body { flex: 1; min-width: 0; }
+.cic-name { font-family: var(--font-display); font-size: .95rem; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+.cic-specs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.cic-spec { font-size: .72rem; color: var(--gray-600); background: rgba(0,0,0,.05); border-radius: 4px; padding: 2px 8px; }
+.cic-rates { display: flex; flex-wrap: wrap; gap: 6px; }
+.cic-rate { font-family: var(--font-display); font-size: .72rem; font-weight: 600; color: var(--gray-600); }
+.cic-rate strong { color: var(--red); }
+.cic-deposit { font-size: .72rem; color: var(--gray-400); margin-top: 6px; }
+
+/* ---- DASHBOARD LINK in footer ---- */
+.dash-link { font-size: .72rem; color: rgba(255,255,255,.2); display: block; margin-top: 12px; transition: color .2s; }
+.dash-link:hover { color: rgba(255,255,255,.5); }
 

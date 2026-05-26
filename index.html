@@ -46,10 +46,14 @@
   <div class="nav-in">
     <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Daily Car Rentals GR" class="nav-logo-img"/></a>
     <div class="nav-links">
-      <a href="index.html">Αρχική</a>
-      <a href="fleet.html">Στόλος</a>
-      <a href="about.html">Σχετικά</a>
-      <a href="contact.html" class="nav-cta">Κράτηση →</a>
+      <a href="index.html" data-i18n="nav-home">Αρχική</a>
+      <a href="fleet.html" data-i18n="nav-fleet">Στόλος</a>
+      <a href="about.html" data-i18n="nav-about">Σχετικά</a>
+      <a href="contact.html" class="nav-cta" data-i18n="nav-book">Κράτηση →</a>
+    </div>
+    <div class="lang-toggle" style="margin-left:8px">
+      <button class="lang-btn active" data-lang="el">ΕΛ</button>
+      <button class="lang-btn" data-lang="en">EN</button>
     </div>
     <button class="hamburger" id="ham" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -252,102 +256,99 @@
       <div class="rv d2"><a href="fleet.html" class="btn-dark">Δείτε όλα →</a></div>
     </div>
     <div class="fleet-grid">
-      <!-- Car 1 -->
-      <div class="car-c rv d1">
-        <div class="car-c-img">
-          <svg viewBox="0 0 300 160" style="width:85%">
-            <ellipse cx="150" cy="140" rx="130" ry="12" fill="rgba(0,0,0,.08)"/>
-            <path d="M25 115 Q25 95 42 90 L80 82 L110 48 Q122 36 145 34 L180 33 Q205 33 218 48 L242 82 L268 87 Q280 90 280 108 L280 115 Z" fill="#ddd"/>
-            <path d="M110 48 Q122 36 145 34 L180 33 Q205 33 218 48 L242 82 L80 82 Z" fill="#c8c8c8"/>
-            <path d="M118 80 L122 52 Q128 40 145 37 L180 36 Q200 36 210 50 L228 80 Z" fill="rgba(120,180,220,.25)" stroke="rgba(100,160,200,.3)" stroke-width="1"/>
-            <line x1="175" y1="37" x2="172" y2="80" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
-            <rect x="25" y="104" width="255" height="5" rx="2.5" fill="rgba(232,28,46,.7)"/>
-            <circle cx="82" cy="120" r="22" fill="#888"/>
-            <circle cx="82" cy="120" r="13" fill="#aaa"/>
-            <circle cx="82" cy="120" r="5" fill="#666"/>
-            <circle cx="225" cy="120" r="22" fill="#888"/>
-            <circle cx="225" cy="120" r="13" fill="#aaa"/>
-            <circle cx="225" cy="120" r="5" fill="#666"/>
+      <!-- A: Toyota Aygo — Mini -->
+      <div class="car-c rv d1" data-cat="mini">
+        <div class="car-c-img bg-economy">
+          <div class="group-code-bg">A</div>
+          <svg class="car-shape" viewBox="0 0 280 140" style="width:82%">
+            <ellipse cx="140" cy="128" rx="118" ry="10" fill="rgba(0,0,0,.07)"/>
+            <path d="M22 108 Q22 90 38 86 L72 78 L100 48 Q110 36 130 34 L162 33 Q182 33 194 46 L218 78 L248 83 Q258 86 258 102 L258 108 Z" fill="#d0d8e4"/>
+            <path d="M100 48 Q110 36 130 34 L162 33 Q182 33 194 46 L218 78 L72 78 Z" fill="#bcc8d8"/>
+            <path d="M107 76 L111 50 Q116 40 130 37 L162 36 Q178 36 187 48 L205 76 Z" fill="rgba(180,210,240,.35)" stroke="rgba(140,180,220,.3)" stroke-width="1"/>
+            <line x1="158" y1="37" x2="156" y2="76" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+            <rect x="22" y="98" width="236" height="4" rx="2" fill="rgba(232,28,46,.65)"/>
+            <circle cx="72" cy="112" r="19" fill="#8a8a8a"/><circle cx="72" cy="112" r="11" fill="#a8a8a8"/><circle cx="72" cy="112" r="4" fill="#666"/>
+            <circle cx="210" cy="112" r="19" fill="#8a8a8a"/><circle cx="210" cy="112" r="11" fill="#a8a8a8"/><circle cx="210" cy="112" r="4" fill="#666"/>
           </svg>
-          <div class="car-cat">Οικονομικό</div>
+          <div class="car-cat">Mini</div>
         </div>
         <div class="car-c-body">
-          <div class="car-name">Compact Economy</div>
-          <div class="car-type-lbl">Μικρό • Οικονομικό • Εύκολο parking</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="background:#111;color:#fff;font-family:var(--font-display);font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:.5px">A</span>
+            <div class="car-name">Toyota Aygo ή παρόμοιο</div>
+          </div>
+          <div class="car-type-lbl">Mini · Βενζίνη · Χειροκίνητο · 3 πόρτες</div>
           <div class="car-specs">
-            <span class="spec-i">Βενζίνη</span>
-            <span class="spec-i">Χειροκίνητο</span>
-            <span class="spec-i">5 θέσεις</span>
+            <span class="spec-i">4 θέσεις</span>
+            <span class="spec-i">Εγγύηση €500</span>
           </div>
           <div class="car-c-ft">
-            <div><div class="price-fr">από</div><div class="price-big">10€ <span>/ ημέρα</span></div></div>
-            <a href="contact.html" class="btn-dark">Κράτηση</a>
+            <div><div class="price-fr">από</div><div class="price-big">17€ <span>/ ημέρα</span></div></div>
+            <a href="contact.html?group=A" class="btn-dark" data-i18n="fleet-book">Κράτηση</a>
           </div>
         </div>
       </div>
-      <!-- Car 2 -->
-      <div class="car-c rv d2">
-        <div class="car-c-img" style="background:linear-gradient(135deg,#e8e8e8,#d8d8d8)">
-          <svg viewBox="0 0 300 160" style="width:85%">
-            <ellipse cx="150" cy="142" rx="135" ry="12" fill="rgba(0,0,0,.07)"/>
-            <path d="M20 118 Q20 96 40 91 L85 82 L118 46 Q130 32 155 30 L185 29 Q210 29 224 46 L252 82 L272 88 Q283 92 283 110 L283 118 Z" fill="#2a2a2a"/>
-            <path d="M118 46 Q130 32 155 30 L185 29 Q210 29 224 46 L252 82 L85 82 Z" fill="#333"/>
-            <path d="M126 80 L130 50 Q136 37 155 33 L185 32 Q207 32 218 48 L238 80 Z" fill="rgba(80,120,180,.2)" stroke="rgba(100,150,200,.25)" stroke-width="1"/>
-            <line x1="172" y1="33" x2="169" y2="80" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
-            <rect x="20" y="107" width="263" height="5" rx="2.5" fill="rgba(232,28,46,.8)"/>
-            <circle cx="85" cy="122" r="23" fill="#111" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
-            <circle cx="85" cy="122" r="14" fill="#1a1a1a" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
-            <circle cx="85" cy="122" r="5" fill="rgba(232,28,46,.5)"/>
-            <circle cx="228" cy="122" r="23" fill="#111" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
-            <circle cx="228" cy="122" r="14" fill="#1a1a1a" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
-            <circle cx="228" cy="122" r="5" fill="rgba(232,28,46,.5)"/>
+      <!-- E: Hyundai i30 — Compact+ -->
+      <div class="car-c rv d2" data-cat="compact">
+        <div class="car-c-img bg-sedan">
+          <div class="group-code-bg">E</div>
+          <svg class="car-shape" viewBox="0 0 300 150" style="width:85%">
+            <ellipse cx="150" cy="136" rx="128" ry="11" fill="rgba(0,0,0,.07)"/>
+            <path d="M20 112 Q20 92 38 88 L80 80 L112 46 Q124 32 148 30 L182 29 Q206 29 220 46 L248 80 L268 86 Q280 90 280 108 L280 112 Z" fill="#2c2c2c"/>
+            <path d="M112 46 Q124 32 148 30 L182 29 Q206 29 220 46 L248 80 L80 80 Z" fill="#383838"/>
+            <path d="M120 78 L124 50 Q130 37 148 33 L182 32 Q202 32 214 48 L234 78 Z" fill="rgba(100,140,200,.22)" stroke="rgba(120,160,220,.25)" stroke-width="1"/>
+            <line x1="168" y1="33" x2="165" y2="78" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+            <rect x="20" y="102" width="260" height="4" rx="2" fill="rgba(232,28,46,.8)"/>
+            <circle cx="80" cy="116" r="21" fill="#111" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/><circle cx="80" cy="116" r="13" fill="#1c1c1c"/><circle cx="80" cy="116" r="5" fill="rgba(232,28,46,.4)"/>
+            <circle cx="224" cy="116" r="21" fill="#111" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/><circle cx="224" cy="116" r="13" fill="#1c1c1c"/><circle cx="224" cy="116" r="5" fill="rgba(232,28,46,.4)"/>
           </svg>
-          <div class="car-cat">Sedan</div>
+          <div class="car-cat">Compact+</div>
         </div>
         <div class="car-c-body">
-          <div class="car-name">Midsize Sedan</div>
-          <div class="car-type-lbl">Άνετο • Ιδανικό για επαγγελματική χρήση</div>
-          <div class="car-specs">
-            <span class="spec-i">Ντίζελ</span>
-            <span class="spec-i">Αυτόματο</span>
-            <span class="spec-i">5 θέσεις</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="background:#111;color:#fff;font-family:var(--font-display);font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:.5px">E</span>
+            <div class="car-name">Hyundai i30 ή παρόμοιο</div>
           </div>
-          <div class="car-c-ft">
-            <div><div class="price-fr">από</div><div class="price-big">18€ <span>/ ημέρα</span></div></div>
-            <a href="contact.html" class="btn-dark">Κράτηση</a>
-          </div>
-        </div>
-      </div>
-      <!-- Car 3 -->
-      <div class="car-c rv d3">
-        <div class="car-c-img" style="background:linear-gradient(135deg,#e0ede0,#d0e4d0)">
-          <svg viewBox="0 0 320 170" style="width:88%">
-            <ellipse cx="160" cy="148" rx="145" ry="13" fill="rgba(0,0,0,.07)"/>
-            <path d="M18 122 Q18 98 40 93 L92 83 L125 44 Q138 28 165 26 L200 25 Q228 25 242 44 L268 83 L288 90 Q302 95 302 115 L302 122 Z" fill="#f0f0f0"/>
-            <path d="M125 44 Q138 28 165 26 L200 25 Q228 25 242 44 L268 83 L92 83 Z" fill="#e0e0e0"/>
-            <path d="M133 81 L137 48 Q144 33 163 29 L200 28 Q222 28 234 46 L256 81 Z" fill="rgba(100,180,100,.18)" stroke="rgba(80,160,80,.2)" stroke-width="1"/>
-            <line x1="182" y1="29" x2="179" y2="81" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
-            <rect x="18" y="111" width="284" height="5" rx="2.5" fill="rgba(232,28,46,.6)"/>
-            <circle cx="92" cy="127" r="24" fill="#888"/>
-            <circle cx="92" cy="127" r="15" fill="#aaa"/>
-            <circle cx="92" cy="127" r="5" fill="#666"/>
-            <circle cx="244" cy="127" r="24" fill="#888"/>
-            <circle cx="244" cy="127" r="15" fill="#aaa"/>
-            <circle cx="244" cy="127" r="5" fill="#666"/>
-          </svg>
-          <div class="car-cat">SUV</div>
-        </div>
-        <div class="car-c-body">
-          <div class="car-name">Compact SUV</div>
-          <div class="car-type-lbl">Ευρύχωρο • Ιδανικό για οικογένεια</div>
+          <div class="car-type-lbl">Compact+ · Βενζίνη · Χειροκίνητο · 5 πόρτες</div>
           <div class="car-specs">
-            <span class="spec-i">Βενζίνη</span>
-            <span class="spec-i">Αυτόματο</span>
             <span class="spec-i">5 θέσεις</span>
+            <span class="spec-i">Εγγύηση €700</span>
           </div>
           <div class="car-c-ft">
             <div><div class="price-fr">από</div><div class="price-big">25€ <span>/ ημέρα</span></div></div>
-            <a href="contact.html" class="btn-dark">Κράτηση</a>
+            <a href="contact.html?group=E" class="btn-dark" data-i18n="fleet-book">Κράτηση</a>
+          </div>
+        </div>
+      </div>
+      <!-- JA: Nissan Qashqai Auto — SUV Auto -->
+      <div class="car-c rv d3" data-cat="suv">
+        <div class="car-c-img bg-suv">
+          <div class="group-code-bg">JA</div>
+          <svg class="car-shape" viewBox="0 0 320 160" style="width:88%">
+            <ellipse cx="160" cy="146" rx="138" ry="12" fill="rgba(0,0,0,.07)"/>
+            <path d="M18 120 Q18 96 40 91 L90 82 L122 44 Q135 28 162 26 L198 25 Q226 25 240 44 L266 82 L286 89 Q300 94 300 114 L300 120 Z" fill="#e8ede8"/>
+            <path d="M122 44 Q135 28 162 26 L198 25 Q226 25 240 44 L266 82 L90 82 Z" fill="#d8e4d8"/>
+            <path d="M130 80 L134 48 Q140 34 160 30 L198 29 Q220 29 232 46 L254 80 Z" fill="rgba(100,180,120,.18)" stroke="rgba(80,160,100,.2)" stroke-width="1"/>
+            <line x1="180" y1="30" x2="177" y2="80" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
+            <rect x="18" y="110" width="282" height="5" rx="2.5" fill="rgba(232,28,46,.6)"/>
+            <circle cx="90" cy="126" r="22" fill="#888"/><circle cx="90" cy="126" r="14" fill="#aaa"/><circle cx="90" cy="126" r="5" fill="#666"/>
+            <circle cx="244" cy="126" r="22" fill="#888"/><circle cx="244" cy="126" r="14" fill="#aaa"/><circle cx="244" cy="126" r="5" fill="#666"/>
+          </svg>
+          <div class="car-cat">SUV Auto</div>
+        </div>
+        <div class="car-c-body">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="background:#111;color:#fff;font-family:var(--font-display);font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:.5px">JA</span>
+            <div class="car-name">Nissan Qashqai Auto ή παρόμοιο</div>
+          </div>
+          <div class="car-type-lbl">SUV · Βενζίνη · Αυτόματο · 5 πόρτες</div>
+          <div class="car-specs">
+            <span class="spec-i">5 θέσεις</span>
+            <span class="spec-i">Εγγύηση €900</span>
+          </div>
+          <div class="car-c-ft">
+            <div><div class="price-fr">από</div><div class="price-big">41€ <span>/ ημέρα</span></div></div>
+            <a href="contact.html?group=JA" class="btn-dark" data-i18n="fleet-book">Κράτηση</a>
           </div>
         </div>
       </div>
@@ -563,6 +564,7 @@
     <div class="ft-bot">
       <span class="ft-copy">© 2025 Daily Car Rentals GR — Κορωπί, Αττική</span>
       <div class="ft-rating"><span class="ft-stars">★★★★★</span> 5.0 Google Reviews</div>
+      <a href="dashboard.html" class="dash-link">· διαχείριση ·</a>
     </div>
   </div>
 </footer>
