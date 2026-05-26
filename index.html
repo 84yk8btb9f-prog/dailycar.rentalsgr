@@ -51,9 +51,12 @@
       <a href="about.html" data-i18n="nav-about">Σχετικά</a>
       <a href="contact.html" class="nav-cta" data-i18n="nav-book">Κράτηση →</a>
     </div>
-    <div class="lang-toggle" style="margin-left:8px">
-      <button class="lang-btn active" data-lang="el">ΕΛ</button>
-      <button class="lang-btn" data-lang="en">EN</button>
+    <div style="display:flex;align-items:center;gap:6px;margin-left:8px;flex-shrink:0">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="el">ΕΛ</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
     </div>
     <button class="hamburger" id="ham" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -127,31 +130,7 @@
       </div>
       <div class="hero-card">
         <div class="car-img-box">
-          <!-- SVG Car Illustration -->
-          <svg class="car-svg" viewBox="0 0 400 220" style="width:88%;filter:drop-shadow(0 0 28px rgba(232,28,46,.25))">
-            <!-- Car body -->
-            <ellipse cx="200" cy="180" rx="175" ry="18" fill="rgba(232,28,46,.08)"/>
-            <!-- Body -->
-            <path d="M40 155 Q40 130 60 125 L110 115 L150 70 Q165 55 195 52 L245 50 Q275 50 295 68 L330 115 L355 120 Q375 125 375 145 L375 155 Z" fill="#1e1e1e" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-            <!-- Roof -->
-            <path d="M150 70 Q165 55 195 52 L245 50 Q275 50 295 68 L330 115 L110 115 Z" fill="#2a2a2a" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-            <!-- Windows -->
-            <path d="M160 112 L165 75 Q172 62 192 59 L245 57 Q268 57 280 70 L305 112 Z" fill="rgba(100,180,255,.12)" stroke="rgba(100,180,255,.2)" stroke-width="1"/>
-            <!-- Divider -->
-            <line x1="235" y1="57" x2="232" y2="112" stroke="rgba(255,255,255,.1)" stroke-width="2"/>
-            <!-- Red stripe -->
-            <rect x="40" y="140" width="335" height="6" rx="3" fill="rgba(232,28,46,.6)"/>
-            <!-- Wheels -->
-            <circle cx="110" cy="160" r="28" fill="#111" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
-            <circle cx="110" cy="160" r="17" fill="#1a1a1a" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
-            <circle cx="110" cy="160" r="7" fill="rgba(232,28,46,.6)"/>
-            <circle cx="295" cy="160" r="28" fill="#111" stroke="rgba(255,255,255,.15)" stroke-width="2"/>
-            <circle cx="295" cy="160" r="17" fill="#1a1a1a" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
-            <circle cx="295" cy="160" r="7" fill="rgba(232,28,46,.6)"/>
-            <!-- Headlight -->
-            <ellipse cx="62" cy="138" rx="14" ry="8" fill="rgba(255,230,100,.15)" stroke="rgba(255,230,100,.25)" stroke-width="1"/>
-            <ellipse cx="357" cy="138" rx="12" ry="7" fill="rgba(255,100,80,.15)" stroke="rgba(255,80,60,.25)" stroke-width="1"/>
-          </svg>
+          <img src="images/nissan-qashqai.jpeg" alt="Nissan Qashqai" class="hero-car-photo"/>
           <div class="price-pill">από 10€<small>/ ημέρα</small></div>
         </div>
         <div class="feat-row">
@@ -264,17 +243,8 @@
       <div class="car-c rv d1" data-cat="mini">
         <div class="car-c-img bg-economy">
           <div class="group-code-bg">A</div>
-          <svg class="car-shape" viewBox="0 0 280 140" style="width:82%">
-            <ellipse cx="140" cy="128" rx="118" ry="10" fill="rgba(0,0,0,.07)"/>
-            <path d="M22 108 Q22 90 38 86 L72 78 L100 48 Q110 36 130 34 L162 33 Q182 33 194 46 L218 78 L248 83 Q258 86 258 102 L258 108 Z" fill="#d0d8e4"/>
-            <path d="M100 48 Q110 36 130 34 L162 33 Q182 33 194 46 L218 78 L72 78 Z" fill="#bcc8d8"/>
-            <path d="M107 76 L111 50 Q116 40 130 37 L162 36 Q178 36 187 48 L205 76 Z" fill="rgba(180,210,240,.35)" stroke="rgba(140,180,220,.3)" stroke-width="1"/>
-            <line x1="158" y1="37" x2="156" y2="76" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
-            <rect x="22" y="98" width="236" height="4" rx="2" fill="rgba(232,28,46,.65)"/>
-            <circle cx="72" cy="112" r="19" fill="#8a8a8a"/><circle cx="72" cy="112" r="11" fill="#a8a8a8"/><circle cx="72" cy="112" r="4" fill="#666"/>
-            <circle cx="210" cy="112" r="19" fill="#8a8a8a"/><circle cx="210" cy="112" r="11" fill="#a8a8a8"/><circle cx="210" cy="112" r="4" fill="#666"/>
-          </svg>
           <div class="car-cat">Mini</div>
+          <img src="images/kia-picanto.jpeg" alt="Toyota Aygo" class="car-photo"/>
         </div>
         <div class="car-c-body">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
@@ -296,17 +266,8 @@
       <div class="car-c rv d2" data-cat="compact">
         <div class="car-c-img bg-sedan">
           <div class="group-code-bg">E</div>
-          <svg class="car-shape" viewBox="0 0 300 150" style="width:85%">
-            <ellipse cx="150" cy="136" rx="128" ry="11" fill="rgba(0,0,0,.07)"/>
-            <path d="M20 112 Q20 92 38 88 L80 80 L112 46 Q124 32 148 30 L182 29 Q206 29 220 46 L248 80 L268 86 Q280 90 280 108 L280 112 Z" fill="#2c2c2c"/>
-            <path d="M112 46 Q124 32 148 30 L182 29 Q206 29 220 46 L248 80 L80 80 Z" fill="#383838"/>
-            <path d="M120 78 L124 50 Q130 37 148 33 L182 32 Q202 32 214 48 L234 78 Z" fill="rgba(100,140,200,.22)" stroke="rgba(120,160,220,.25)" stroke-width="1"/>
-            <line x1="168" y1="33" x2="165" y2="78" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
-            <rect x="20" y="102" width="260" height="4" rx="2" fill="rgba(232,28,46,.8)"/>
-            <circle cx="80" cy="116" r="21" fill="#111" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/><circle cx="80" cy="116" r="13" fill="#1c1c1c"/><circle cx="80" cy="116" r="5" fill="rgba(232,28,46,.4)"/>
-            <circle cx="224" cy="116" r="21" fill="#111" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/><circle cx="224" cy="116" r="13" fill="#1c1c1c"/><circle cx="224" cy="116" r="5" fill="rgba(232,28,46,.4)"/>
-          </svg>
           <div class="car-cat">Compact+</div>
+          <img src="images/hyundai-i30.jpeg" alt="Hyundai i30" class="car-photo"/>
         </div>
         <div class="car-c-body">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
@@ -328,17 +289,8 @@
       <div class="car-c rv d3" data-cat="suv">
         <div class="car-c-img bg-suv">
           <div class="group-code-bg">JA</div>
-          <svg class="car-shape" viewBox="0 0 320 160" style="width:88%">
-            <ellipse cx="160" cy="146" rx="138" ry="12" fill="rgba(0,0,0,.07)"/>
-            <path d="M18 120 Q18 96 40 91 L90 82 L122 44 Q135 28 162 26 L198 25 Q226 25 240 44 L266 82 L286 89 Q300 94 300 114 L300 120 Z" fill="#e8ede8"/>
-            <path d="M122 44 Q135 28 162 26 L198 25 Q226 25 240 44 L266 82 L90 82 Z" fill="#d8e4d8"/>
-            <path d="M130 80 L134 48 Q140 34 160 30 L198 29 Q220 29 232 46 L254 80 Z" fill="rgba(100,180,120,.18)" stroke="rgba(80,160,100,.2)" stroke-width="1"/>
-            <line x1="180" y1="30" x2="177" y2="80" stroke="rgba(255,255,255,.5)" stroke-width="1.5"/>
-            <rect x="18" y="110" width="282" height="5" rx="2.5" fill="rgba(232,28,46,.6)"/>
-            <circle cx="90" cy="126" r="22" fill="#888"/><circle cx="90" cy="126" r="14" fill="#aaa"/><circle cx="90" cy="126" r="5" fill="#666"/>
-            <circle cx="244" cy="126" r="22" fill="#888"/><circle cx="244" cy="126" r="14" fill="#aaa"/><circle cx="244" cy="126" r="5" fill="#666"/>
-          </svg>
           <div class="car-cat">SUV Auto</div>
+          <img src="images/nissan-qashqai.jpeg" alt="Nissan Qashqai" class="car-photo"/>
         </div>
         <div class="car-c-body">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
