@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var storedTm = JSON.parse(localStorage.getItem('dcr_testimonials') || '[]');
     var featuredTm = storedTm.filter(function(t) { return t.featured; });
     if (featuredTm.length) {
-      var cards = featuredTm.map(function(t) {
+      var userCards = featuredTm.map(function(t) {
         var stars = Array(t.stars + 1).join('★');
         return '<div class="rv-card">' +
           '<div class="rv-stars">' + stars + '</div>' +
@@ -210,7 +210,10 @@ document.addEventListener('DOMContentLoaded', function() {
           '</div>' +
         '</div>';
       }).join('');
-      rvTrack.insertAdjacentHTML('beforeend', cards);
+      /* Rebuild track as [user+orig] + [user+orig] for seamless -50% marquee */
+      var origCards = Array.from(rvTrack.querySelectorAll('.rv-card')).slice(0, 5).map(function(c) { return c.outerHTML; }).join('');
+      var half = userCards + origCards;
+      rvTrack.innerHTML = half + half;
     }
   }
 
