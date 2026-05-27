@@ -631,18 +631,16 @@ footer { background: var(--black); padding: 80px 0 0; border-top: 1px solid rgba
 .dash-link:hover { color: rgba(255,255,255,.5); }
 
 
-/* ---- AWARD SECTION ---- */
-.award-section { background: #fff; }
-.award-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.award-title { letter-spacing: -2px; }
-.award-sub { font-size: 1rem; color: var(--gray-600); line-height: 1.75; max-width: 460px; margin-top: 16px; margin-bottom: 32px; }
-.award-badge-row { display: flex; flex-direction: column; gap: 14px; }
-.award-badge-item { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: .88rem; font-weight: 600; color: var(--gray-800); }
-.award-badge-item svg { color: var(--red); flex-shrink: 0; }
-.award-img-wrap { display: flex; justify-content: center; align-items: center; }
-.award-img { width: 100%; max-width: 480px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,.10), 0 4px 16px rgba(0,0,0,.06); object-fit: cover; display: block; }
-@media (max-width: 900px) {
-  .award-grid { grid-template-columns: 1fr; gap: 40px; }
-  .award-img-wrap { order: -1; }
-  .award-img { max-width: 100%; }
+/* ---- AWARD STRIP (about page) ---- */
+.award-strip-section { padding: 0 0 80px; }
+.award-strip-inner { display: flex; align-items: center; gap: 32px; background: var(--gray-100); border-radius: 20px; padding: 28px 36px; }
+.award-strip-photo { width: 100px; height: 100px; object-fit: cover; border-radius: 12px; flex-shrink: 0; box-shadow: 0 4px 16px rgba(0,0,0,.10); }
+.award-strip-body { flex: 1; min-width: 0; }
+.award-strip-body .s-tag { margin-bottom: 6px; }
+.award-strip-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: var(--black); letter-spacing: -.5px; margin: 0 0 6px; }
+.award-strip-title span { color: var(--red); }
+.award-strip-desc { font-size: .88rem; color: var(--gray-600); line-height: 1.6; margin: 0; }
+@media (max-width: 540px) {
+  .award-strip-inner { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
+  .award-strip-photo { width: 80px; height: 80px; }
 }
